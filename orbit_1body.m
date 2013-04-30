@@ -23,7 +23,7 @@ function [position,velocity,t]=orbit_1body(G,M,m,p0,v0,dt,tmax)
 	global potentialEnergy;
 	global potentialEnergyVector;
 	potentialEnergyVector = zeros(numberOfSteps,1);
-	size(potentialEnergyVector)
+	% size(potentialEnergyVector)
 
 	for s = 1:numberOfSteps-1
 		t(s+1) = t(s) + dt;
@@ -34,8 +34,8 @@ function [position,velocity,t]=orbit_1body(G,M,m,p0,v0,dt,tmax)
 		position(s+1,:) = position(s,:) + velocity(s,:)*dt + 0.5 * sateliteAcceleration(s,:) * (dt^2);
 		velocity(s+1,:) = velocity(s,:) + 0.5 * (sateliteAcceleration(s+1,:) + sateliteAcceleration(s,:)) * dt;
 
-		potentialEnergyVector(s+1) = 0.5*sum(potentialEnergy);
+		potentialEnergyVector(s+1) = potentialEnergy(1);
 	end
 	
 	kineticEnergyVector = sum(velocity.^2, 2) .* (m/2);
-	size(kineticEnergyVector)
+	% size(kineticEnergyVector)
