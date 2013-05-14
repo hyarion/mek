@@ -8,7 +8,7 @@ function [position,velocity,t]=orbit_1body(G,M,m,p0,v0,dt,tmax)
 	t         = zeros(numberOfSteps,1);
 	position  = zeros(numberOfSteps,2);
 	velocity  = zeros(numberOfSteps,2);
-	sateliteAcceleration = zeros(numberOfSteps,2);
+	acceleration = zeros(numberOfSteps,2);
 
 	% Debug
 	global kineticEnergyVector = zeros(numberOfSteps,1);
@@ -18,7 +18,7 @@ function [position,velocity,t]=orbit_1body(G,M,m,p0,v0,dt,tmax)
 
 	positions = [0 0 ; p0];
 	tmp = calculateAccelerations(positions, masses, gravitationalConstant);
-	sateliteAcceleration(1,:) = tmp(2,:);
+	acceleration(1,:) = tmp(2,:);
 
 	global potentialEnergy;
 	global potentialEnergyVector;
@@ -27,12 +27,13 @@ function [position,velocity,t]=orbit_1body(G,M,m,p0,v0,dt,tmax)
 
 	for s = 1:numberOfSteps-1
 		t(s+1) = t(s) + dt;
-		positions = [0 0 ; position(s,:)];
-		accelerations = calculateAccelerations(positions, masses, gravitationalConstant);
+		position(s+1,:) = position(s,:) + velocity(s,:)*dt + 0.5 * acceleration(s,:) * (dt^2);
 
-		sateliteAcceleration(s,:) = accelerations(2,:);
-		position(s+1,:) = position(s,:) + velocity(s,:)*dt + 0.5 * sateliteAcceleration(s,:) * (dt^2);
-		velocity(s+1,:) = velocity(s,:) + 0.5 * (sateliteAcceleration(s+1,:) + sateliteAcceleration(s,:)) * dt;
+		tmpPositions = [0 0 ; position(s+1,:)];
+		tmpAccelerations = calculateAccelerations(tmpPositions, masses, gravitationalConstant);
+
+		acceleration(s+1,:) = tmpAccelerations(2,:);
+		velocity(s+1,:) = velocity(s,:) + 0.5 * (acceleration(s+1,:) + acceleration(s,:)) * dt;
 
 		potentialEnergyVector(s+1) = potentialEnergy(1);
 	end

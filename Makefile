@@ -1,5 +1,4 @@
-TESTS  = calculateAccelerations_test.m
-TESTS += calculateDifferenceVectors_test.m
+TESTS = $(wildcard *_test.m)
 
 TESTED_FILES = $(patsubst %_test.m,%.m,$(TESTS))
 
@@ -10,3 +9,7 @@ tests: $(TESTS) $(TESTED_FILES)
 	echo "Running tests in" $$f; \
 	$(OCTAVE) -f $$f; \
 	done
+
+uppg1: uppg1.m
+	$(OCTAVE) -f $<
+.PHONY: uppg1
