@@ -36,7 +36,7 @@ hold off;
 xs = rotdim(p(:,1,:));
 ys = rotdim(p(:,2,:));
 plot( xs,ys );
-legend('Solen','Merkurius','Venus','Jorden','Mars');
+legend('Sun','Mercury','Venus','Earth','Mars');
 print(gcf, '-dpng', 'uppg4_orbit.png');
 
 printf('Linear momentum\n')
@@ -57,7 +57,7 @@ totalKinetic = sum(kinetic,1);
 plot(t,kinetic,t,totalKinetic)
 ylabel('Kinetic Energy (J)')
 xlabel('Time (s)')
-legend('Solen','Merkurius','Venus','Jorden','Mars','Total');
+legend('Sun','Mercury','Venus','Earth','Mars','Total');
 print(gcf, '-dpng', 'uppg4_kinetic.png');
 
 
@@ -66,7 +66,7 @@ potential = calculatePotentialEnergy(masses', p, G);
 plot(t',potential,t',sum(potential,1))
 ylabel('Potential Energy (J)')
 xlabel('Time (s)')
-legend('Solen','Merkurius','Venus','Jorden','Mars','Total');
+legend('Sun','Mercury','Venus','Earth','Mars','Total');
 %potential
 print(gcf, '-dpng', 'uppg4_potential.png');
 
@@ -74,7 +74,7 @@ printf('Total energy\n')
 plot(t, potential + kinetic, t, sum(potential + kinetic));
 ylabel('Energy (J)')
 xlabel('Time (s)')
-legend('Solen','Merkurius','Venus','Jorden','Mars','Total');
+legend('Sun','Mercury','Venus','Earth','Mars','Total');
 print(gcf, '-dpng', 'uppg4_total_energy.png');
 clear kinetic
 clear totalKinetic
