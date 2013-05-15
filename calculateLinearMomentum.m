@@ -4,8 +4,8 @@ assert(size(masses),[numberOfBodies 1]);
 
 momentum = zeros(numberOfBodies,numberOfDimensions,numberOfTimesteps);
 
-tmpMasses = masses * ones(1,1,numberOfTimesteps);
+tmpMasses = masses * ones(1,numberOfDimensions);
 
-for d = 1:numberOfDimensions
-	momentum(:,d,:) = tmpMasses .* velocities(:,d,:);
+for t = 1:numberOfTimesteps
+	momentum(:,:,t) = tmpMasses .* velocities(:,:,t);
 endfor
