@@ -25,11 +25,44 @@ hjälp av Velocity-Verlet-simulering.
 \section{Simulering av satellit}
 Satellitens omloppsbana går att finna i Figur~\vref{fig:satellite}.
 För att satellitens omloppsbana ska bli stabil behöver $\Delta t$ vara kring
-???.
+$100s$.
+Se Figur~\vref{fig:satellite:findstableorbit}
+\begin{figure}
+\begin{center}
+$<(((((><$
+\end{center}
+\caption{Satellitens omloppsbana.}
+\label{fig:satellite}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+$<(((((><$
+\end{center}
+\caption{Satellitens bana när $\Delta t$ förändras.}
+\label{fig:satellite:findstableorbit}
+\end{figure}
+
 I Figur~\vref{fig:satellite:energy} går det att se hur energin i systemet ändras
 över tiden.
 I Figur~\vref{fig:satellite:linearmomentum} går det att se hur rörelsemängden i
 systemet ändras över tiden.
+
+\begin{figure}
+\begin{center}
+$<(((((><$
+\end{center}
+\caption{DETTA ÄR EN BILD PÅ ENERGIN!}
+\label{fig:satellite:energy}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+$><)))))>$
+\end{center}
+\caption{DETTA ÄR EN BILD PÅ LINEARMOMENTUM!}
+\label{fig:satellite:linearmomentum}
+\end{figure}
 
 
 \section{Omloppstiden}
@@ -37,9 +70,33 @@ systemet ändras över tiden.
 För att beräkna omloppstiden itererar vi igenom positionerna och ser när
 positionen går in i första kvadranten.
 
-Omloppstiden för satelliten är beräknad till: ????.
+Omloppstiden för satelliten är beräknad till: $37s$.
 
-Om initialhastigheten ökas till ??? lämnar satelliten sin omloppsbana.
+Om initialhastigheten ökas till runt $1.4$ lämnar satelliten sin omloppsbana.
+Se Figur~\vref{fig:orbit:mutlipleorbits}.
+I Figur~\vref{fig:orbit:timeforvelocity} kan vi se att omloppstiden ökar exponensiellt
+med initialhastigheten.
+
+\begin{figure}
+\begin{center}
+$><)))))>$
+\end{center}
+\caption{
+Omloppsbanor då initialhastigheten förändras hos satelliten.
+}
+\label{fig:orbit:mutlipleorbits}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+$><)))))>$
+\end{center}
+\caption{
+Som vi kan se så ökar omloppstiden exponensiellt med initialhastigheten.
+Som förväntat ökar energin kvadratiskt.
+}
+\label{fig:orbit:timeforvelocity}
+\end{figure}
 
 	\subsection{ISS}
 För att undersöka om våran simuleringsmodell fungerar testar vi att simulera
@@ -58,20 +115,22 @@ Den data vi fört in i system återfinns i Tabell~\vref{iss:data}.
 	$h$       &  $4.12 \cdot 10^5$ \\
 	$r_J$     &  $6.371 \cdot 10^6$
 \end{tabular}
-\caption{Tabell över data använt i simulering av ISS omloppsbana kring jorden.}
+\caption{
+Tabell över data använt i simulering av ISS omloppsbana
+kringjorden.[wikipedia]}
 \label{iss:data}
 \end{center}
 \end{table}
 
-Den simulerade omloppstiden för ISS är beräknad till ???.
+Den simulerade omloppstiden för ISS är beräknad till $5651s$ vilket tycks
+stämma ganska bra med det riktiga värdet som ligger på $5570s$ [wikipedia].
 
 \section{Tvåkroppsproblemet}
 Denna uppgift är överhoppad då den är så pass lik nästkommande uppgift.
 
 \section{Solsystemet}
-För att testa om simuleringen fungerar för fler $n$ stycken kroppar så testar
-vi att simulera solsystemets inre kroppar; Solen, Merkurius, Venus, Jorden samt
-Mars.
+För att testa om simuleringen fungerar för $n$ stycken kroppar så testar vi att
+simulera solsystemets inre kroppar; Solen, Merkurius, Venus, Jorden samt Mars.
 Data för dessa kroppar återfinns i Tabell~\vref{solarsystem:data}.
 
 \begin{table}
@@ -94,8 +153,8 @@ Data för dessa kroppar återfinns i Tabell~\vref{solarsystem:data}.
 	
 
 		\subsection{Stabil bana}
-Ett problem med tidsdiskretiserad simulering är att resultatet ändras om man
-justerar tiden mellan varje iteration.
+Som nämnts tidigare är ett problem med tidsdiskretiserad simulering, att
+resultatet ändras om man justerar tiden mellan varje iteration.
 För att en simulering ska bli stabil måste ett tillräckligt lågt $\Delta t$
 väljas.
 Som går att se i Figur~\vref{fig:solarsystem:large:dt} så kan man få oönskat
