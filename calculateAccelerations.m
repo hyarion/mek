@@ -19,9 +19,9 @@ function accelerations = calculateAccelerations(positions, masses, gravitational
 		accelerations(:,dimension) = tmp1 * (tmp2 ./ distanceCube);
 	end
 
-	global potentialEnergy = zeros(numberOfBodies,1);
-	massMatrix = masses' * masses;
+	%global potentialEnergy = zeros(numberOfBodies,1);
+	%massMatrix = masses' * masses;
 	% distances
-	massMatrix(logical(eye(numberOfBodies))) = 0;
+	%massMatrix(logical(eye(numberOfBodies))) = 0;
 	% massMatrix
-	potentialEnergy = magicConstant * sum((massMatrix ./ distances),1);
+	%potentialEnergy = magicConstant * sum((massMatrix ./ distances),1);

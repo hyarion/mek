@@ -7,8 +7,8 @@ v0 = [0, 0.75];
 tmax = 1000;
 dt = 0.5;
 
-global kineticEnergyVector;
-global potentialEnergyVector;
+%global kineticEnergyVector;
+%global potentialEnergyVector;
 
 [p, v, t] = orbit_1body(G,M,m,p0,v0,dt,tmax);
 

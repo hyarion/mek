@@ -9,3 +9,5 @@ tmpMasses = masses * ones(1,numberOfDimensions);
 for t = 1:numberOfTimesteps
 	momentum(:,:,t) = tmpMasses .* velocities(:,:,t);
 endfor
+
+%momentum

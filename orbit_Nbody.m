@@ -21,9 +21,9 @@ function [position,velocity,t]=orbit_Nbody(G,m,p0,v0,dt,tmax)
 	%tmp = calculateAccelerations(positions, masses, gravitationalConstant);
 	%sateliteAcceleration(1,:) = tmp(2,:);
 
-	global potentialEnergy;
-	global potentialEnergyVector;
-	potentialEnergyVector = zeros(numberOfSteps,1);
+	%global potentialEnergy;
+	%global potentialEnergyVector;
+	%potentialEnergyVector = zeros(numberOfSteps,1);
 	% size(potentialEnergyVector)
 
 	for s = 1:numberOfSteps-1
@@ -36,7 +36,12 @@ function [position,velocity,t]=orbit_Nbody(G,m,p0,v0,dt,tmax)
 		velocity(:,:,s+1) = velocity(:,:,s) + 0.5 * (acceleration(:,:,s+1) + acceleration(:,:,s)) * dt;
 
 		%potentialEnergyVector(s+1) = potentialEnergy(1);
+		if rem(s,5E3) == 0
+			printf('.',stderr)
+			fflush(stderr);
+		end
 	end
+	printf('\n',stderr)
 
 	% plot(position(:,1,:), position(:,2,:))
 	

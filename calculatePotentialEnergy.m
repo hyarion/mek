@@ -2,20 +2,27 @@ function potential = calculatePotentialEnergy(masses,positions,gravitationalCons
 [numberOfBodies, numberOfDimensions, numberOfTimesteps] = size(positions);
 assert(size(masses),[numberOfBodies 1]);
 
-potential = zeros(numberOfBodies, numberOfTimesteps);
+potential = zeros(numberOfBodies,numberOfTimesteps);
 
-distances = sqrt(sum(calculateDifferenceVectors(positions).^2,3)); % + eye(numberOfBodies);
 % tmpMasses = masses * ones(1,numberOfBodies);
 % tmpMasses(logical(eye(numberOfBodies))) = 0;
 
 for t = 1:numberOfTimesteps
 % 	potential(:,t) = - (tmpMasses ./ distances) * masses;
-	for k = 1:numberOfBodies
-		for r = 1:numberOfBodies
+	distances = sqrt(sum(calculateDifferenceVectors(positions(:,:,t)).^2,3));
+	%distances./1.49597871E11
+	% + eye(numberOfBodies);
+	for r = 1:numberOfBodies-1
+		%printf('\tr: %d\n',r)
+		for k = 1:numberOfBodies
+			%printf('\t\tk: %d\n',k)
 			if r ~= k
-				potential(k,1) += masses(r) ./ distances(k,r);
+				potential(r,t) += masses(k) ./ distances(r,k);
+				%printf('\t\t\tv: %g\n',masses(k) ./ distances(r,k))
 			end
 		end
-		potential(k,1) *= - masses(k) * gravitationalConstant;
+		%printf('\t\tmasses(r): %g\n',masses(r))
+		potential(r,t) *= (-masses(r)) * gravitationalConstant;
 	end
 end
+

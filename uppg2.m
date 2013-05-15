@@ -9,8 +9,8 @@ dt = 0.5;
 
 N = tmax / dt;
 
-global kineticEnergyVector;
-global potentialEnergyVector;
+%global kineticEnergyVector;
+%global potentialEnergyVector;
 
 %[p, v, t] = orbit_1body(G,M,m,p0,v0,dt,tmax);
 %T = orbit_time(p(:,1),p(:,2),t)
