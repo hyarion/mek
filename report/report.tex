@@ -16,9 +16,15 @@ Emil Eriksson, c07een@cs.umu.se\\
 }
 \clearpage
 
+\section{Introduktion}
+I följande laboration kommer vi att gå igenom svar på uppgifter vi fått och
+diskussion om dessa.
+Laborationen gick ut på att implementera och analysera n-kropps-problem med
+hjälp av Velocity-Verlet-simulering.
+
 \section{Simulering av satellit}
 Satellitens omloppsbana går att finna i Figur~\vref{fig:satellite}.
-För att satellitens omloppsbana ska bli stabil behöver $\delta t$ vara kring
+För att satellitens omloppsbana ska bli stabil behöver $\Delta t$ vara kring
 ???.
 I Figur~\vref{fig:satellite:energy} går det att se hur energin i systemet ändras
 över tiden.
@@ -90,7 +96,7 @@ Data för dessa kroppar återfinns i Tabell~\vref{solarsystem:data}.
 		\subsection{Stabil bana}
 Ett problem med tidsdiskretiserad simulering är att resultatet ändras om man
 justerar tiden mellan varje iteration.
-För att en simulering ska bli stabil måste ett tillräckligt lågt $\delta t$
+För att en simulering ska bli stabil måste ett tillräckligt lågt $\Delta t$
 väljas.
 Som går att se i Figur~\vref{fig:solarsystem:large:dt} så kan man få oönskat
 resultat detta värde väljs för högt, men om man istället väljer ett
@@ -153,7 +159,9 @@ Den som kan hitta anledningen blir belönad med bulle och tillhörande kaffe.
 \end{table}
 
 \section{Källkod}
-	Matlabkoden går att återfinna på: \url{https://github.com/asheidan/mek}
+	Matlabkoden går att återfinna på:\\
+	\url{https://github.com/asheidan/mek} samt
+	\url{https://github.com/hyarion/mek}
 	
 
 \end{document}
