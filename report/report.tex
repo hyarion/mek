@@ -1,0 +1,159 @@
+\documentclass[a4]{article}
+\usepackage{hyperref}
+\usepackage[swedish]{babel,varioref}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+{
+\Large
+Solsystemet\\
+Klassisk Mekanik\\
+~\\
+Benjamin Nauck, c05ben@cs.umu.se\\
+Emil Eriksson, c07een@cs.umu.se\\
+~\\
+\today{}
+}
+\clearpage
+
+\section{Simulering av satellit}
+Satellitens omloppsbana går att finna i Figur~\vref{fig:satellite}.
+För att satellitens omloppsbana ska bli stabil behöver $\delta t$ vara kring
+???.
+I Figur~\vref{fig:satellite:energy} går det att se hur energin i systemet ändras
+över tiden.
+I Figur~\vref{fig:satellite:linearmomentum} går det att se hur rörelsemängden i
+systemet ändras över tiden.
+
+
+\section{Omloppstiden}
+	\subsection{Beräkning av omloppstid}
+För att beräkna omloppstiden itererar vi igenom positionerna och ser när
+positionen går in i första kvadranten.
+
+Omloppstiden för satelliten är beräknad till: ????.
+
+Om initialhastigheten ökas till ??? lämnar satelliten sin omloppsbana.
+
+	\subsection{ISS}
+För att undersöka om våran simuleringsmodell fungerar testar vi att simulera
+rymdstationen ISS omloppsbana kring jorden med verklig data.
+
+Den data vi fört in i system återfinns i Tabell~\vref{iss:data}.
+\begin{table}
+\begin{center}
+\begin{tabular}{c|c}
+	konstant & värde \\
+	\hline
+	$G$       &  $6.67384 \cdot 10^{-11}$ \\
+	$m_J$     &  $5.972 \cdot 10^{24}$ \\
+	$m_{\mathrm{ISS}}$ &  $4.5 \cdot 10^5$ \\
+	$v_0$     &  $7.7066 \cdot 10^3$ \\
+	$h$       &  $4.12 \cdot 10^5$ \\
+	$r_J$     &  $6.371 \cdot 10^6$
+\end{tabular}
+\caption{Tabell över data använt i simulering av ISS omloppsbana kring jorden.}
+\label{iss:data}
+\end{center}
+\end{table}
+
+Den simulerade omloppstiden för ISS är beräknad till ???.
+
+\section{Tvåkroppsproblemet}
+Denna uppgift är överhoppad då den är så pass lik nästkommande uppgift.
+
+\section{Solsystemet}
+För att testa om simuleringen fungerar för fler $n$ stycken kroppar så testar
+vi att simulera solsystemets inre kroppar; Solen, Merkurius, Venus, Jorden samt
+Mars.
+Data för dessa kroppar återfinns i Tabell~\vref{solarsystem:data}.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{c|c|c|c}
+	Planet    & Massa (relativt jordens) & Avstånd till Solen (mätt i $AU$) & hastighet\\
+	\hline
+	Merkurius & $5.5 \cdot 10^{-2}$  & $4 \cdot 10^{-1}$  &  $4.787 \cdot 10^4$ \\
+	Venus     & $8.15 \cdot 10^{-1}$ & $7 \cdot 10^{-1}$  &  $3.502 \cdot 10^4$ \\ 
+	Jorden    & $1$                  & $1$                &  $2.978 \cdot 10^4$ \\
+	Mars      & $1.07 \cdot 10^{-1}$ & $1.5$              &  $2.4077 \cdot 10^4$
+\end{tabular}
+\caption{
+	Tabell över de inre planeternas och solens massor, planeternas avstånd till
+	solen relativt jordens samt dess hastighet.[wikipedia]
+}
+\label{solarsystem:data}
+\end{center}
+\end{table}
+	
+
+		\subsection{Stabil bana}
+Ett problem med tidsdiskretiserad simulering är att resultatet ändras om man
+justerar tiden mellan varje iteration.
+För att en simulering ska bli stabil måste ett tillräckligt lågt $\delta t$
+väljas.
+Som går att se i Figur~\vref{fig:solarsystem:large:dt} så kan man få oönskat
+resultat detta värde väljs för högt, men om man istället väljer ett
+tillräckligt lågt tal så stabiliseras omloppsbanorna, se
+Figur~\vref{fig:solarsystem:small:enough:dt}.
+
+%		\subsection{Planetära omloppsbanor} % svarat på ovan
+
+		\subsection{Validering av simulering}
+Vidare går det att undersöka om energin och rörelsemängden
+%samt rörelse\-mängds\-momentet
+bevaras genom simuleringen för att validera
+simuleringsmodellen.
+
+I Figur~\vref{fig:solarsystem:energy} kan vi se TODO: add what we can read.
+\begin{figure}
+\begin{center}
+$<(((((><$
+\end{center}
+\caption{DETTA ÄR EN BILD PÅ ENERGIN I SOLSYSTEMET!}
+\label{fig:solarsystem:energy}
+\end{figure}
+
+I Figur~\vref{fig:solarsystem:linearmomentum} kan vi se TODO: add what we can read.
+\begin{figure}
+\begin{center}
+:D
+\end{center}
+\caption{DETTA ÄR EN BILD PÅ RÖRELSEMOMENTET I SOLSYSTEMET!}
+\label{fig:solarsystem:linearmomentum}
+\end{figure}
+
+%Och slutligen i Figur~\vref{fig:solarsystem:energy} kan vi se TODO: add what we can read.
+
+		\subsection{Omloppstider}
+Mycket går att analysera genom att undersöka energibevarande och så vidare, men
+simulerar man verkligheten bör man även undersöka så att simuleringen verkligen
+ter sig som verkligheten.
+Av denna anledning har vi undersökt tiden för planeternas omloppsbanor i
+Tabell~\vref{table:solarsystem:orbit:reality:check}.
+Som vi kan se så stämmer inte våra simulerade tider speciellt bra med
+verkligheten.
+Den som kan hitta anledningen blir belönad med bulle och tillhörande kaffe.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{c|c|c}
+	Planet    & Simulerad omloppstid & Reell omloppstid \\
+	\hline
+	Merkurius & $6.046 \cdot 10^6$ &  $7.60053 \cdot 10^7$ \\
+	Venus     & $7.470 \cdot 10^5$ &  $1.94139 \cdot 10^7$ \\ 
+	Jorden    & $1.570 \cdot 10^7$ &  $3.15581 \cdot 10^7$ \\
+	Mars      & $3.498 \cdot 10^7$ &  $5.93542 \cdot 10^7$
+\end{tabular}
+\caption{
+	Tabell över de inre planeternas omloppstider.[wikipedia]
+}
+\label{table:solarsystem:orbit:reality:check}
+\end{center}
+\end{table}
+
+\section{Källkod}
+	Matlabkoden går att återfinna på: \url{https://github.com/asheidan/mek}
+	
+
+\end{document}
