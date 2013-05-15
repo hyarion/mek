@@ -26,7 +26,7 @@ sunspeed = [-sum(masses' .* v0(:,1)),-sum(masses' .* v0(:,2))] ./ masses(1);
 v0(1,:) = sunspeed;
 v0(2:5,:) += ones(4,1) * sunspeed;
 
-dt = 1E4;
+dt = 1E3;
 tmax = 60*60*24*365.25 * 2;
 
 hold off;
@@ -106,3 +106,9 @@ printf('\tMars: ')
 xs = rotdim(p(5,1,:));
 ys = rotdim(p(5,2,:));
 printf('%g\n',orbit_time(xs,ys,t))
+
+%        Merkurius: 6.046e+06
+%        Venus: 747000
+%        Jorden: 1.5698e+07
+%        Mars: 3.4975e+07
+
