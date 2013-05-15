@@ -4,11 +4,8 @@ m = 0.01;
 p0 = [10, 0];
 v0 = [0, 0.75];
 
-tmax = 1000;
-dt = 0.5;
-
-%global kineticEnergyVector;
-%global potentialEnergyVector;
+tmax = 100;
+dt = 0.01;
 
 [p, v, t] = orbit_1body(G,M,m,p0,v0,dt,tmax);
 
@@ -22,13 +19,26 @@ ylabel('y')
 legend('Satelite','Planet');
 print(gcf, '-dpng', 'uppg1_orbit.png');
 
+masses = [M m]';
+positions = zeros(2,2,size(v,1));
+for n = 1:size(v,2)
+	positions(2,n,:) = p(:,n);
+end
+potentialEnergy = calculatePotentialEnergy(masses,positions,G);
+potentialEnergy = potentialEnergy(2,:);
+velocities = zeros(2,2,size(v,1));
+for n = 1:size(v,2)
+	velocities(2,n,:) = v(:,n);
+end
+kineticEnergy = calculateKineticEnergy(masses, velocities);
+kineticEnergy = kineticEnergy(2,:);
 % size(potentialEnergyVector);
 % size(kineticEnergyVector');
-plot(t, [potentialEnergyVector kineticEnergyVector (potentialEnergyVector+kineticEnergyVector)]);
+plot(t, potentialEnergy, t, kineticEnergy, t,(potentialEnergy+kineticEnergy));
 title('Energy over time');
 xlabel('Time (s)');
 ylabel('Energy');
-legend('pot','kin','sum')
+legend('Potential','Kinetic','Total')
 print(gcf, '-dpng', 'uppg1_energy.png')
 
 [AX,H1,H2] = plotyy(t, sqrt(sum(v.^2,2)), t, sqrt(sum(p.^2,2)));

@@ -12,7 +12,7 @@ for t = 1:numberOfTimesteps
 	distances = sqrt(sum(calculateDifferenceVectors(positions(:,:,t)).^2,3));
 	%distances./1.49597871E11
 	% + eye(numberOfBodies);
-	for r = 1:numberOfBodies-1
+	for r = 1:numberOfBodies
 		%printf('\tr: %d\n',r)
 		for k = 1:numberOfBodies
 			%printf('\t\tk: %d\n',k)
