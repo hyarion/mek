@@ -22,8 +22,11 @@ v0 = [
 	2.978E4 0
 	2.4077E4 0
 ];
+sunspeed = [-sum(masses' .* v0(:,1))/masses(1) 0]
+v0(1,:) = sunspeed;
+v0(2:5,:) -= sunspeed * ones(5,1);
 
-dt = 1E3;
+dt = 1E4;
 tmax = 60*60*24*365.25 / 2;
 
 hold off;
@@ -34,3 +37,11 @@ xs = rotdim(p(:,1,:));
 ys = rotdim(p(:,2,:));
 plot( xs,ys );
 legend('Solen','Merkurius','Venus','Jorden','Mars');
+print(gcf, '-dpng', 'uppg4_orbit.png');
+
+momentum = calculateLinearMomentum(masses', v);
+totalMomentum = (sum(momentum,2));
+xs = rotdim(totalMomentum(1,1,:));
+ys = rotdim(totalMomentum(2,1,:));
+plot(xs,ys,'+')
+print(gcf, '-dpng', 'uppg4_momentum.png');

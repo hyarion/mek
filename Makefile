@@ -10,6 +10,6 @@ tests: $(TESTS) $(TESTED_FILES)
 	$(OCTAVE) -f $$f; \
 	done
 
-uppg1: uppg1.m
+uppg%: uppg%.m
 	$(OCTAVE) -f $<
 .PHONY: uppg1
