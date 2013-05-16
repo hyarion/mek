@@ -31,6 +31,13 @@ tmax = 60*60*24*365.25 * 2;
 
 hold off;
 
+[p,v,t] = orbit_Nbody(G, masses, p0,v0, dt*20,tmax);
+xs = rotdim(p(:,1,:));
+ys = rotdim(p(:,2,:));
+plot( xs,ys );
+legend('Sun','Mercury','Venus','Earth','Mars');
+print(gcf, '-dpng', 'uppg4_orbit_bad.png');
+
 [p,v,t] = orbit_Nbody(G, masses, p0,v0, dt,tmax);
 %size(p)
 xs = rotdim(p(:,1,:));
@@ -45,7 +52,7 @@ totalMomentum = (sum(momentum,1));
 %size(totalMomentum)
 xs = rotdim(totalMomentum(1,1,:));
 ys = rotdim(totalMomentum(1,2,:));
-plot(t,sqrt(xs.^2+ys.^2))
+plot(t,sqrt(xs.^2+ys.^2),'+')
 ylabel('Linear momentum (kg m^2/s)')
 xlabel('Time (s)')
 print(gcf, '-dpng', 'uppg4_momentum.png');

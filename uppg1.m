@@ -48,7 +48,7 @@ plot(t,xs.^2+ys.^2);
 title('Size of linear momentum over time')
 xlabel('Time (s)');
 ylabel('Linear momentum (kg m^2/s)')
-print(gcf, '-dpng', 'uppg1_energy.png')
+print(gcf, '-dpng', 'uppg1_momentum.png')
 
 [AX,H1,H2] = plotyy(t, sqrt(sum(v.^2,2)), t, sqrt(sum(p.^2,2)));
 title('Velocity and distance over time')

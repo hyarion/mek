@@ -2,6 +2,7 @@
 \usepackage{hyperref}
 \usepackage[swedish]{babel,varioref}
 \usepackage[utf8]{inputenc}
+\usepackage{graphicx}
 
 \begin{document}
 {
@@ -26,22 +27,22 @@ hjälp av Velocity-Verlet-simulering.
 Satellitens omloppsbana går att finna i Figur~\vref{fig:satellite}.
 För att satellitens omloppsbana ska bli stabil behöver $\Delta t$ vara kring
 $100s$.
-Se Figur~\vref{fig:satellite:findstableorbit}
+%Se Figur~\vref{fig:satellite:findstableorbit}
 \begin{figure}
 \begin{center}
-$<(((((><$
+	\includegraphics[width=\textwidth]{../uppg1_orbit.png}
 \end{center}
 \caption{Satellitens omloppsbana.}
 \label{fig:satellite}
 \end{figure}
 
-\begin{figure}
-\begin{center}
-$<(((((><$
-\end{center}
-\caption{Satellitens bana när $\Delta t$ förändras.}
-\label{fig:satellite:findstableorbit}
-\end{figure}
+%\begin{figure}
+%\begin{center}
+%	\includegraphics[width=\textwidth]{}
+%\end{center}
+%\caption{Satellitens bana när $\Delta t$ förändras.}
+%\label{fig:satellite:findstableorbit}
+%\end{figure}
 
 I Figur~\vref{fig:satellite:energy} går det att se hur energin i systemet ändras
 över tiden.
@@ -50,7 +51,7 @@ systemet ändras över tiden.
 
 \begin{figure}
 \begin{center}
-$<(((((><$
+	\includegraphics[width=\textwidth]{../uppg1_energy.png}
 \end{center}
 \caption{DETTA ÄR EN BILD PÅ ENERGIN!}
 \label{fig:satellite:energy}
@@ -58,7 +59,7 @@ $<(((((><$
 
 \begin{figure}
 \begin{center}
-$><)))))>$
+	\includegraphics[width=\textwidth]{../uppg1_momentum.png}
 \end{center}
 \caption{DETTA ÄR EN BILD PÅ LINEARMOMENTUM!}
 \label{fig:satellite:linearmomentum}
@@ -79,7 +80,7 @@ med initialhastigheten.
 
 \begin{figure}
 \begin{center}
-$><)))))>$
+	\includegraphics[width=\textwidth]{../uppg2_orbits.png}
 \end{center}
 \caption{
 Omloppsbanor då initialhastigheten förändras hos satelliten.
@@ -89,7 +90,7 @@ Omloppsbanor då initialhastigheten förändras hos satelliten.
 
 \begin{figure}
 \begin{center}
-$><)))))>$
+	\includegraphics[width=\textwidth]{../uppg2_energy.png}
 \end{center}
 \caption{
 Som vi kan se så ökar omloppstiden exponensiellt med initialhastigheten.
@@ -124,6 +125,15 @@ kringjorden.[wikipedia]}
 
 Den simulerade omloppstiden för ISS är beräknad till $5651s$ vilket tycks
 stämma ganska bra med det riktiga värdet som ligger på $5570s$ [wikipedia].
+
+\begin{figure}
+\begin{center}
+	\includegraphics[width=\textwidth]{../uppg2_iss.png}
+\end{center}
+\caption{
+	ISS simulerade omloppsbana kring jorden för ett antal värden på $\Delta t$
+}
+\end{figure}
 
 \section{Tvåkroppsproblemet}
 Denna uppgift är överhoppad då den är så pass lik nästkommande uppgift.
@@ -173,16 +183,49 @@ simuleringsmodellen.
 I Figur~\vref{fig:solarsystem:energy} kan vi se TODO: add what we can read.
 \begin{figure}
 \begin{center}
-$<(((((><$
+	\includegraphics[width=\textwidth]{../uppg4_orbit_bad}
 \end{center}
-\caption{DETTA ÄR EN BILD PÅ ENERGIN I SOLSYSTEMET!}
+\caption{DETTA ÄR EN PÅ INSTABILA OMLOPPSBANOR I SOLSYSTEMET!}
+\label{fig:solarsystem:large:dt}
+\end{figure}
+
+I Figur~\vref{fig:solarsystem:energy} kan vi se TODO: add what we can read.
+\begin{figure}
+\begin{center}
+	\includegraphics[width=\textwidth]{../uppg4_orbit}
+\end{center}
+\caption{DETTA ÄR EN BILD PÅ SOLSYSTEMET!}
+\label{fig:solarsystem:small:enough:dt}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+	\includegraphics[width=\textwidth]{../uppg4_potential}
+\end{center}
+\caption{DETTA ÄR EN BILD PÅ DEN POTENTIELLA ENERGIN I SOLSYSTEMET!}
+\label{fig:solarsystem:potential}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+	\includegraphics[width=\textwidth]{../uppg4_kinetic}
+\end{center}
+\caption{DETTA ÄR EN BILD PÅ RÖRELSEENERGIN I SOLSYSTEMET!}
+\label{fig:solarsystem:kinetic}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+	\includegraphics[width=\textwidth]{../uppg4_total_energy}
+\end{center}
+\caption{DETTA ÄR EN BILD PÅ DEN TOTALA ENERGIN I SOLSYSTEMET!}
 \label{fig:solarsystem:energy}
 \end{figure}
 
 I Figur~\vref{fig:solarsystem:linearmomentum} kan vi se TODO: add what we can read.
 \begin{figure}
 \begin{center}
-:D
+	\includegraphics[width=\textwidth]{../uppg4_momentum}
 \end{center}
 \caption{DETTA ÄR EN BILD PÅ RÖRELSEMOMENTET I SOLSYSTEMET!}
 \label{fig:solarsystem:linearmomentum}
