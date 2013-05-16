@@ -23,6 +23,7 @@ v0 = [
 	0 2.4077E4
 ];
 sunspeed = [-sum(masses' .* v0(:,1)),-sum(masses' .* v0(:,2))] ./ masses(1);
+sunspeed * masses(1)
 v0(1,:) = sunspeed;
 v0(2:5,:) += ones(4,1) * sunspeed;
 
