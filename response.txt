@@ -12,7 +12,7 @@ rapporten.
   igenom och ändra där det behövs, tex omloppstiden för satelliten borde anges
   i tidsenheter istället för sekunder.
 
-- i orbit_Nbody har ni ett index fel som gör att  metoden inte blir riktigt
+? i orbit_Nbody har ni ett index fel som gör att  metoden inte blir riktigt
   stabil och påverkar era resultat: acceleration(:,:,s+1) =
   calculateAccelerations(position(:,:,s+1), masses, gravitationalConstant);
 

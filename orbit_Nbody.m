@@ -31,7 +31,7 @@ function [position,velocity,t]=orbit_Nbody(G,m,p0,v0,dt,tmax)
 
 		position(:,:,s+1) = position(:,:,s) + velocity(:,:,s)*dt + 0.5 * acceleration(:,:,s) * (dt^2);
 
-		acceleration(:,:,s+1) = calculateAccelerations(position(:,:,s), masses, gravitationalConstant);
+		acceleration(:,:,s+1) = calculateAccelerations(position(:,:,s+1), masses, gravitationalConstant);
 
 		velocity(:,:,s+1) = velocity(:,:,s) + 0.5 * (acceleration(:,:,s+1) + acceleration(:,:,s)) * dt;
 
