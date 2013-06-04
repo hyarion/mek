@@ -43,8 +43,8 @@ hold off;
 print(gcf, '-dpng', 'uppg2_orbits.png')
 
 [AX,H1,H2] = plotyy(orbitVelocities,orbitTimes,orbitVelocities,totalEnergy);
-set(get(AX(1),'Ylabel'),'String', 'Time (s)')
-set(get(AX(2),'Ylabel'),'String', 'Energy (J)')
+set(get(AX(1),'Ylabel'),'String', 'Time')
+set(get(AX(2),'Ylabel'),'String', 'Energy')
 xlabel('Velocity (m/s)')
 print(gcf, '-dpng', 'uppg2_energy.png')
 

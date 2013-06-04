@@ -1,14 +1,14 @@
 Hej!  Resultaten ser bra ut, det är bara ett par saker som behöver ändras i
 rapporten.
 
-- Jättebra att ni har beskrivningar på axlarna, en sak att tänka på är dock att
+? Jättebra att ni har beskrivningar på axlarna, en sak att tänka på är dock att
   i de första uppgifterna när vi har G=1 använder vi inte SI-enheter så man
   borde egentligen inte skriva ut (s),(m), (J) osv i de figurerna. Eftersom det
   är oklart vilka enheter som används är det enklast att inte skriva dit några
   enheter, men vill man vara riktigt korrekt så ska man skriva (längdenheter),
   (tidsenheter)  osv men det behöver ni inte göra det i det här fallet.
 
-- samma sak gäller också övriga texten i rapporten i de uppgifter där G=1,  läs
+? samma sak gäller också övriga texten i rapporten i de uppgifter där G=1,  läs
   igenom och ändra där det behövs, tex omloppstiden för satelliten borde anges
   i tidsenheter istället för sekunder.
 
