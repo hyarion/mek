@@ -1,35 +1,62 @@
-Hej!
-Resultaten ser bra ut, det är bara ett par saker som behöver ändras i rapporten.
+Hej!  Resultaten ser bra ut, det är bara ett par saker som behöver ändras i
+rapporten.
 
-- Jättebra att ni har beskrivningar på axlarna, en sak att tänka på är dock att i de första uppgifterna när vi har G=1 använder vi inte SI-enheter så man borde egentligen inte skriva ut (s),(m), (J) osv i de figurerna. Eftersom det är oklart vilka enheter som används är det enklast att inte skriva dit några enheter, men vill man vara riktigt korrekt så ska man skriva (längdenheter), (tidsenheter)  osv men det behöver ni inte göra det i det här fallet.
+- Jättebra att ni har beskrivningar på axlarna, en sak att tänka på är dock att
+  i de första uppgifterna när vi har G=1 använder vi inte SI-enheter så man
+  borde egentligen inte skriva ut (s),(m), (J) osv i de figurerna. Eftersom det
+  är oklart vilka enheter som används är det enklast att inte skriva dit några
+  enheter, men vill man vara riktigt korrekt så ska man skriva (längdenheter),
+  (tidsenheter)  osv men det behöver ni inte göra det i det här fallet.
 
-- samma sak gäller också övriga texten i rapporten i de uppgifter där G=1,  läs igenom och ändra där det behövs, tex omloppstiden för satelliten borde anges i tidsenheter istället för sekunder.
+- samma sak gäller också övriga texten i rapporten i de uppgifter där G=1,  läs
+  igenom och ändra där det behövs, tex omloppstiden för satelliten borde anges
+  i tidsenheter istället för sekunder.
 
-- i orbit_Nbody har ni ett index fel som gör att  metoden inte blir riktigt stabil och påverkar era resultat: 
-acceleration(:,:,s+1) = calculateAccelerations(position(:,:,s+1), masses, gravitationalConstant);
+- i orbit_Nbody har ni ett index fel som gör att  metoden inte blir riktigt
+  stabil och påverkar era resultat: acceleration(:,:,s+1) =
+  calculateAccelerations(position(:,:,s+1), masses, gravitationalConstant);
 
-- ni skriver att dt måste vara 100s (tidsenheter!) för att få en stabil bana, det kan inte stämma eftersom omloppstiden är ca 36.5 tidsenheter
+- ni skriver att dt måste vara 100s (tidsenheter!) för att få en stabil bana,
+  det kan inte stämma eftersom omloppstiden är ca 36.5 tidsenheter
 
-- ni gör tester med olika dt på flera av uppgifterna och visar figurer med resultatet vilket är bra, men ni skriver inte ut vilket värde på dt ni faktiskt väljer när ni sedan går vidare.
+- ni gör tester med olika dt på flera av uppgifterna och visar figurer med
+  resultatet vilket är bra, men ni skriver inte ut vilket värde på dt ni
+  faktiskt väljer när ni sedan går vidare.
 
-- i figur 2 borde total kurvan bli en rak linje eftersom energin ska vara bevarad. ser ut som ni har en faktor 2 fel på potentiella energin. Den potentiella energin är något som varje planetpar delar på tillsammans, så den ska bara tas med en gång. 
+- i figur 2 borde total kurvan bli en rak linje eftersom energin ska vara
+  bevarad. ser ut som ni har en faktor 2 fel på potentiella energin. Den
+  potentiella energin är något som varje planetpar delar på tillsammans, så den
+  ska bara tas med en gång. 
 
-- i figur 3 ange om ni plottar x-eller y-komponenten av rörelse mängden, gör gärna en kurva med varje. 
+- i figur 3 ange om ni plottar x-eller y-komponenten av rörelse mängden, gör
+  gärna en kurva med varje. 
 
-- i figur 5 plottar ni antagligen den kinetiska energin, plotta den totala energin istället. När satelliten lämnar omloppsbanan ska den totala energin vara 0.
+- i figur 5 plottar ni antagligen den kinetiska energin, plotta den totala
+  energin istället. När satelliten lämnar omloppsbanan ska den totala energin
+  vara 0.
 
-- i figur 9 och 11 måste ni kolla så att den potentiella energin inte blir för hög, energi bidraget från varje planetpar ska bara finnas med en gång i den totala potentiella energin. Ni plottar tex  plot(t, potential + kinetic, t, sum(potential + kinetic));   sum(kinetic) är helt ok att göra , men sum(potential) kommer att ta med alla partikel par två gånger. 
+- i figur 9 och 11 måste ni kolla så att den potentiella energin inte blir för
+  hög, energi bidraget från varje planetpar ska bara finnas med en gång i den
+  totala potentiella energin. Ni plottar tex  plot(t, potential + kinetic, t,
+  sum(potential + kinetic));   sum(kinetic) är helt ok att göra , men
+  sum(potential) kommer att ta med alla partikel par två gånger. 
 
-- gör om figur 12 till 2 figurer, en med6-kurvor  x-komponenten av rörelsemängden för alla planeter + en kurva med totala rörelse mängden i x-led, gör sedan samma sak med y komponenten i nästa figur.
+- gör om figur 12 till 2 figurer, en med6-kurvor  x-komponenten av
+  rörelsemängden för alla planeter + en kurva med totala rörelse mängden i
+  x-led, gör sedan samma sak med y komponenten i nästa figur.
 
-- för att få bra omloppstider behöver ni fler värdesiffror i initialvärdena särskilt massan och avståndet bör anges mer noggrant.
+- för att få bra omloppstider behöver ni fler värdesiffror i initialvärdena
+  särskilt massan och avståndet bör anges mer noggrant.
 
-- lista planeternas omloppstider i dygn så är det lättare att se hur nära ni är.
+- lista planeternas omloppstider i dygn så är det lättare att se hur nära ni
+  är.
 
-- kontrollera att er orbit_time funktion verkligen fungerar som det är tänkt. Med rätt initialvärden bör felet inte vara mer än ca ett dygn.
+- kontrollera att er orbit_time funktion verkligen fungerar som det är tänkt.
+  Med rätt initialvärden bör felet inte vara mer än ca ett dygn.
 
-I övrigt ser det bra ut, fixa till ovanstående och skicka in så är det klart sen.
-När ni skickar in den uppdaterade versionen gör det gärna genom att svara på det här mailet,
-så blir det lättare för mig att hålla ordning på vilka rapporter som hör ihop.
-Har ni några frågor så är det bara att höra av er till mig
+I övrigt ser det bra ut, fixa till ovanstående och skicka in så är det klart
+sen.  När ni skickar in den uppdaterade versionen gör det gärna genom att svara
+på det här mailet, så blir det lättare för mig att hålla ordning på vilka
+rapporter som hör ihop.  Har ni några frågor så är det bara att höra av er till
+mig
 
