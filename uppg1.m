@@ -46,7 +46,7 @@ xs = rotdim(momentum(2,1,:));
 ys = rotdim(momentum(2,2,:));
 plot(t,xs.^2+ys.^2);
 title('Size of linear momentum over time')
-xlabel('Time (s)');
+xlabel('Time');
 ylabel('Linear momentum')
 print(gcf, '-dpng', 'uppg1_momentum.png')
 
@@ -54,7 +54,7 @@ print(gcf, '-dpng', 'uppg1_momentum.png')
 title('Velocity and distance over time')
 set(get(AX(1),'Ylabel'),'String', 'Speed')
 set(get(AX(2),'Ylabel'),'String', 'Distance')
-xlabel('Time (s)')
+xlabel('Time')
 print(gcf, '-dpng', 'uppg1_speed.png')
 
 plot(t,v)
