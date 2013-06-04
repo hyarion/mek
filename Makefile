@@ -4,7 +4,7 @@ TESTED_FILES = $(patsubst %_test.m,%.m,$(TESTS))
 
 OCTAVE = octave -q
 
-default: .uppg1 .uppg2 .uppg2_iss .uppg4
+default: .uppg1 .uppg2 .uppg2_iss .uppg4 report
 
 .uppg2_iss: uppg2_iss.m
 	$(OCTAVE) -f $<
@@ -19,3 +19,7 @@ tests: $(TESTS) $(TESTED_FILES)
 .uppg%: uppg%.m
 	$(OCTAVE) -f $<
 	touch $@
+
+report: .uppg1 .uppg2 .uppg2_iss .uppg4
+	cd "$(@)"; make
+.PHONY: report

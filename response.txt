@@ -48,9 +48,8 @@ rapporten.
 - för att få bra omloppstider behöver ni fler värdesiffror i initialvärdena
   särskilt massan och avståndet bör anges mer noggrant.
 
-- lista planeternas omloppstider i dygn så är det lättare att se hur nära ni
+? lista planeternas omloppstider i dygn så är det lättare att se hur nära ni
   är.
-
 
 ? kontrollera att er orbit_time funktion verkligen fungerar som det är tänkt.
   Med rätt initialvärden bör felet inte vara mer än ca ett dygn.
