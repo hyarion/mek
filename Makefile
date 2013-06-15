@@ -4,7 +4,7 @@ TESTED_FILES = $(patsubst %_test.m,%.m,$(TESTS))
 
 OCTAVE = octave -q
 
-default: .uppg1 .uppg2 .uppg2_iss .uppg4 report
+default: .uppg1 .uppg2 .uppg2_iss .uppg4
 
 .uppg2_iss: uppg2_iss.m
 	$(OCTAVE) -f $<

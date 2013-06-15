@@ -1,19 +1,20 @@
+DAYLENGTH = 24 * 60 * 60;
 G = 6.67384E-11;
-M = 5.972E24;
+%M = 5.9721986E24;
 masses = [
-	1.989E30
-	5.5E-2 * M
-	8.15E-1 * M
-	1 * M
-	1.07E-1 * M
+	1.988435E30
+	3.3022E23
+	4.869E24
+	5.9721986E24;
+	6.4191E23
 ]';
 Au = 1.49597871E11;
 p0 = [
 	0, 0
-	4E-1 * Au, 0
-	7E-1 * Au, 0
-	1 * Au, 0
-	1.5 * Au, 0
+	5.7909100E10, 0
+	1.08208000E11, 0
+	1.49598261E11, 0
+	2.27939100E11, 0
 ];
 v0 = [
 	0 0
@@ -22,10 +23,14 @@ v0 = [
 	0 2.978E4
 	0 2.4077E4
 ];
-sunspeed = [-sum(masses' .* v0(:,1)),-sum(masses' .* v0(:,2))] ./ masses(1);
+format long;
+sunspeed = [-sum(masses' .* v0(:,1)),-sum(masses' .* v0(:,2))] ./ masses(1)
 sunspeed * masses(1)
 v0(1,:) = sunspeed;
 v0(2:5,:) += ones(4,1) * sunspeed;
+
+linear_momentum = (ones(2,1) * masses)' .* v0
+sum(linear_momentum)
 
 dt = 1E3;
 tmax = 60*60*24*365.25 * 2;
@@ -98,22 +103,22 @@ printf('Orbital times\n')
 printf('\tMerkurius: ')
 xs = rotdim(p(2,1,:));
 ys = rotdim(p(2,2,:));
-printf('%g\n',orbit_time(xs,ys,t))
+printf('%g\n',orbit_time(xs,ys,t)/DAYLENGTH)
 
 printf('\tVenus: ')
 xs = rotdim(p(3,1,:));
 ys = rotdim(p(3,2,:));
-printf('%g\n',orbit_time(xs,ys,t))
+printf('%g\n',orbit_time(xs,ys,t)/DAYLENGTH)
 
 printf('\tJorden: ')
 xs = rotdim(p(4,1,:));
 ys = rotdim(p(4,2,:));
-printf('%g\n',orbit_time(xs,ys,t))
+printf('%g\n',orbit_time(xs,ys,t)/DAYLENGTH)
 
 printf('\tMars: ')
 xs = rotdim(p(5,1,:));
 ys = rotdim(p(5,2,:));
-printf('%g\n',orbit_time(xs,ys,t))
+printf('%g\n',orbit_time(xs,ys,t)/DAYLENGTH)
 
 %        Merkurius: 6.046e+06
 %        Venus: 747000
