@@ -1,49 +1,32 @@
-function [position,velocity,t]=orbit_Nbody(G,m,p0,v0,dt,tmax)
+function [position,velocity,t]=orbit_Nbody(G,m,x0,y0,vx0,vy0,dt,tmax)
 	masses = m;
-	%gravitationalConstant = 6.67384E-11;
 	gravitationalConstant = G;
-	[numberOfBodies,numberOfDimensions] = size(p0);
-
-
+	numberOfBodies = size(m,1);
 	numberOfSteps = floor(tmax/dt) + 1;
-	t         = zeros(numberOfSteps,1);
-	position  = zeros(numberOfBodies,numberOfDimensions,numberOfSteps);
-	velocity  = zeros(numberOfBodies,numberOfDimensions,numberOfSteps);
-	acceleration = zeros(numberOfBodies,numberOfDimensions,numberOfSteps);
 
-	% Debug
-	%global kineticEnergyVector = zeros(numberOfSteps,1);
+	t  = zeros(numberOfSteps,1);
+	x  = zeros(numberOfBodies,numberOfSteps);
+	y  = zeros(numberOfBodies,numberOfSteps);
+	vx = zeros(numberOfBodies,numberOfSteps);
+	vy = zeros(numberOfBodies,numberOfSteps);
+	ax = zeros(numberOfBodies,numberOfSteps);
+	ay = zeros(numberOfBodies,numberOfSteps);
 
-	position(:,:,1) = p0;
-	velocity(:,:,1) = v0;
-	acceleration(:,:,1) = calculateAccelerations(position(:,:,1),masses, gravitationalConstant);
-
-	%tmp = calculateAccelerations(positions, masses, gravitationalConstant);
-	%sateliteAcceleration(1,:) = tmp(2,:);
-
-	%global potentialEnergy;
-	%global potentialEnergyVector;
-	%potentialEnergyVector = zeros(numberOfSteps,1);
-	% size(potentialEnergyVector)
+	x(:,1) = x0;
+	y(:,1) = y0;
+	vx(:,1) = vx0;
+	vy(:,1) = vy0;
+	[ax(:,1), ay(:,1)] = calculateAccelerations(x(:,1), y(:,1), masses, gravitationalConstant);
 
 	for s = 1:numberOfSteps-1
 		t(s+1) = t(s) + dt;
 
-		position(:,:,s+1) = position(:,:,s) + velocity(:,:,s)*dt + 0.5 * acceleration(:,:,s) * (dt^2);
+		x(:,s+1) = x(:,s) + vx(:,s)*dt + 0.5 * ax(:,s) * (dt^2);
+		y(:,s+1) = y(:,s) + vy(:,s)*dt + 0.5 * ay(:,s) * (dt^2);
 
-		acceleration(:,:,s+1) = calculateAccelerations(position(:,:,s+1), masses, gravitationalConstant);
+		[ax(:,s+1), ay(:,s+1)] = calculateAccelerations(x(:,s), y(:,s), masses, gravitationalConstant);
 
-		velocity(:,:,s+1) = velocity(:,:,s) + 0.5 * (acceleration(:,:,s+1) + acceleration(:,:,s)) * dt;
-
-		%potentialEnergyVector(s+1) = potentialEnergy(1);
-		if rem(s,5E3) == 0
-			printf('.',stderr)
-			fflush(stderr);
-		end
+		vx(:,s+1) = vx(:,s) + 0.5 * (ax(:,s+1) + ax(:,s)) * dt;
+		vy(:,s+1) = vy(:,s) + 0.5 * (ay(:,s+1) + ay(:,s)) * dt;
 	end
-	printf('\n',stderr)
 
-	% plot(position(:,1,:), position(:,2,:))
-	
-	%kineticEnergyVector = sum(velocity.^2, 2) .* (m/2);
-	% size(kineticEnergyVector)

@@ -1,27 +1,22 @@
-function accelerations = calculateAccelerations(positions, masses, gravitationalConstant)
-	[numberOfBodies,numberOfDimensions] = size(positions);
+function [ax, ay] = calculateAccelerations(x, y, masses, gravitationalConstant)
+	numberOfBodies = size(masses);
 
-	magicConstant = - gravitationalConstant / 2.0;
+	ax = zeros(numberOfBodies,1);
+	ay = zeros(numberOfBodies,1);
 
-	differenceVectors = calculateDifferenceVectors(positions);
-	distanceVectors = differenceVectors.^2; % rename difference per axis squared
-	distances = sqrt(sum(distanceVectors, 3));
-	distances += eye(numberOfBodies); % enable us to divide by distance
+	for j = 1:numberOfBodies
+		for k = 1:numberOfBodies
+			if j ~= k
+				xdiff = x(j) - x(k);
+				ydiff = y(j) - y(k);
 
-	distanceCube = distances.^3;
-	
-	%distanceCube += eye(numberOfBodies);
+				distance = sqrt(xdiff^2 + ydiff^2);
 
-	accelerations = zeros(numberOfBodies,numberOfDimensions);
-	for dimension = 1:numberOfDimensions
-		tmp1 = gravitationalConstant * masses;
-		tmp2 = differenceVectors(:,:,dimension);
-		accelerations(:,dimension) = tmp1 * (tmp2 ./ distanceCube);
+				% calculate the size of the acceleration
+				a = G .* m(k) ./ distance.^2;
+
+				ax(j) = a * xdiff / distance;
+				ay(j) = a * ydiff / distance;
+			end
+		end
 	end
-
-	%global potentialEnergy = zeros(numberOfBodies,1);
-	%massMatrix = masses' * masses;
-	% distances
-	%massMatrix(logical(eye(numberOfBodies))) = 0;
-	% massMatrix
-	%potentialEnergy = magicConstant * sum((massMatrix ./ distances),1);
