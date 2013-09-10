@@ -1,4 +1,4 @@
-function [position,velocity,t, kinetic, potential]=orbit_1body(G,M,m,p0,v0,dt,tmax)
+function [position,velocity,t, kinetic, potential, angular]=orbit_1body(G,M,m,p0,v0,dt,tmax)
 	masses = [M m];
 	gravitationalConstant = G;
 
@@ -15,6 +15,8 @@ function [position,velocity,t, kinetic, potential]=orbit_1body(G,M,m,p0,v0,dt,tm
 	% momentumY = zeros(numberOfSteps,1);
 	kinetic   = zeros(numberOfSteps,1);
 	potential = zeros(numberOfSteps,1);
+
+	angular   = zeros(numberOfSteps,1);
 
 	positionX(1) = p0(1);
 	positionY(1) = p0(2);
@@ -42,6 +44,9 @@ function [position,velocity,t, kinetic, potential]=orbit_1body(G,M,m,p0,v0,dt,tm
 
 	kinetic = m .* (velocityX.^2 + velocityY.^2) ./ 2;
 	potential = -G .* m .* M ./ sqrt( positionX.^2 + positionY.^2);
+
+
+	angular = m .* (positionX .* velocityY - positionY .* velocityX);
 
 	position = [positionX positionY];
 	velocity = [velocityX velocityY];
