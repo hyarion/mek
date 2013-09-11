@@ -16,14 +16,14 @@ rapporten.
   stabil och påverkar era resultat: acceleration(:,:,s+1) =
   calculateAccelerations(position(:,:,s+1), masses, gravitationalConstant);
 
-- ni skriver att dt måste vara 100s (tidsenheter!) för att få en stabil bana,
+! ni skriver att dt måste vara 100s (tidsenheter!) för att få en stabil bana,
   det kan inte stämma eftersom omloppstiden är ca 36.5 tidsenheter
 
 - ni gör tester med olika dt på flera av uppgifterna och visar figurer med
   resultatet vilket är bra, men ni skriver inte ut vilket värde på dt ni
   faktiskt väljer när ni sedan går vidare.
 
-- i figur 2 borde total kurvan bli en rak linje eftersom energin ska vara
++ i figur 2 borde total kurvan bli en rak linje eftersom energin ska vara
   bevarad. ser ut som ni har en faktor 2 fel på potentiella energin. Den
   potentiella energin är något som varje planetpar delar på tillsammans, så den
   ska bara tas med en gång. 

@@ -25,7 +25,7 @@ xlabel('Time')
 ylabel('Energy')
 legend('Kinetic','Potential');
 print(gcf, '-dpng', 'uppg1_energy.png');
- size([m.*v(:,1), m.*v(:,2)])
+
 plot(t,[m.*v(:,1), m.*v(:,2)]);
 title('Size of linear momentum over time')
 xlabel('Time');

@@ -78,12 +78,13 @@ rörelsemängdsmomentet i systemet ändras över tiden.
 
 \section{Omloppstiden}
 	\subsection{Beräkning av omloppstid}
-För att beräkna omloppstiden itererar vi igenom positionerna och ser när
-positionen går in i första kvadranten.
+För att beräkna omloppstiden gör vi om positionen till vinkeln relativt x och
+y-axeln, sedan itererar vi igenom den resulterande vektorn och ser när vinkeln
+återkommer till samma värde.
 
-Omloppstiden för satelliten är beräknad till: $37$.
+Omloppstiden för satelliten är beräknad till: $37$ tidsenheter.
 
-Om initialhastigheten ökas till runt $1.4$ lämnar satelliten sin omloppsbana.
+Om initialhastigheten ökas till runt $1.4$ hastighetsenheter lämnar satelliten sin omloppsbana.
 Se Figur~\vref{fig:orbit:mutlipleorbits}.
 I Figur~\vref{fig:orbit:timeforvelocity} kan vi se att omloppstiden ökar exponensiellt
 med initialhastigheten.
@@ -110,7 +111,7 @@ Som förväntat ökar energin kvadratiskt.
 \end{figure}
 
 	\subsection{ISS}
-För att undersöka om våran simuleringsmodell fungerar testar vi att simulera
+För att undersöka om vår simuleringsmodell fungerar testar vi att simulera
 rymdstationen ISS omloppsbana kring jorden med verklig data.
 
 Den data vi fört in i system återfinns i Tabell~\vref{iss:data}.
@@ -133,8 +134,15 @@ kringjorden.[wikipedia]}
 \end{center}
 \end{table}
 
-Den simulerade omloppstiden för ISS är beräknad till $5651s$ vilket tycks
-stämma ganska bra med det riktiga värdet som ligger på $5570s$ [wikipedia].
+Den simulerade omloppstiden för ISS är beräknad till ungefär $5650s$ vilket
+tycks stämma ganska bra med det riktiga värdet som ligger på $5570s$
+[wikipedia].
+
+Med minskande värde på $\Delta t$ närmar sig den simulerade tiden ett stabilt
+värde vilket kan ses i Figur~\vref{iss:tider}.
+Omloppsbanorna för simuleringarna återfinns i Figur~\vref{iss:banor}.
+Banorna ser stabila ut vid $\Delta t = 100s$ men omloppstiden ovan är beräknad
+med $\Delta t = 1.5s$.
 
 \begin{figure}
 \begin{center}
@@ -143,6 +151,17 @@ stämma ganska bra med det riktiga värdet som ligger på $5570s$ [wikipedia].
 \caption{
 	ISS simulerade omloppsbana kring jorden för ett antal värden på $\Delta t$
 }
+\label{iss:banor}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+	\includegraphics[width=\textwidth]{../uppg2_iss_time.png}
+\end{center}
+\caption{
+	Beräknad omloppstid för ISS med minskande värde på $\Delta t$
+}
+\label{iss:tider}
 \end{figure}
 
 \section{Tvåkroppsproblemet}
