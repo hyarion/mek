@@ -1,4 +1,4 @@
-function [positionX,positionY,velocityX,velocityY,t]=orbit_Nbody(G,m,p0,v0,dt,tmax)
+function [positionX,positionY,velocityX,velocityY,t, kinetic, potential, angular]=orbit_Nbody(G,m,p0,v0,dt,tmax)
 
 	gravitationalConstant = G;
 
@@ -14,7 +14,7 @@ function [positionX,positionY,velocityX,velocityY,t]=orbit_Nbody(G,m,p0,v0,dt,tm
 
 	% momentumX = zeros(numberOfSteps,1);
 	% momentumY = zeros(numberOfSteps,1);
-	kinetic   = zeros(numberOfSteps,2);
+	kinetic   = zeros(numberOfSteps,numberOfBodies);
 	potential = zeros(numberOfSteps,1);
 
 	angular   = zeros(numberOfSteps,1);
@@ -43,8 +43,21 @@ function [positionX,positionY,velocityX,velocityY,t]=orbit_Nbody(G,m,p0,v0,dt,tm
 	end
 	
 
-	% kinetic = m .* (velocityX.^2 + velocityY.^2) ./ 2;
-	% potential = -G .* m .* M ./ sqrt( positionX.^2 + positionY.^2);
+	kinetic = sum(m .* (velocityX.^2 + velocityY.^2) ./ 2,2);
+	for p = 1:numberOfBodies
+		px = positionX(:,p);
+		py = positionY(:,p);
+		for q = 1: numberOfBodies
+			if p ~= q
+				qx = positionX(:,q);
+				qy = positionY(:,q);
+				r = sqrt((px.-qx).^2 + (py.-qy).^2);
+				potential += -G .* m(p) .* m(q) ./ r;
+			end
+		end
+	end
+	potential ./= 2;
+	
 
 
 	% angular = m .* (positionX .* velocityY - positionY .* velocityX);
