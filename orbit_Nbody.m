@@ -22,8 +22,8 @@ function [positionX,positionY,velocityX,velocityY,t]=orbit_Nbody(G,m,p0,v0,dt,tm
 	positionX(1,:) = p0(1,:);
 	positionY(1,:) = p0(2,:);
                           
-	velocityX(1,:) = v0(1,:)
-	velocityY(1,:) = v0(2,:)
+	velocityX(1,:) = v0(1,:);
+	velocityY(1,:) = v0(2,:);
 
 	%ax = @(x, y, p) -G * M * x / sqrt(x^2 + y^2)^3;
 	%ay = @(x, y, p) -G * M * y / sqrt(x^2 + y^2)^3;

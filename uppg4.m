@@ -7,7 +7,7 @@ masses = [
 	4.869E24
 	5.9721986E24;
 	6.4191E23
-];
+]';
 Au = 1.49597871E11;
 p0 = [
 	0, 0
@@ -15,19 +15,19 @@ p0 = [
 	1.08208000E11, 0
 	1.49598261E11, 0
 	2.27939100E11, 0
-];
+]';
 v0 = [
 	0 0
 	0 4.787E4
 	0 3.502E4
 	0 2.978E4
 	0 2.4077E4
-];
+]';
 format long;
-sunspeed = [-sum(masses .* v0(:,1)),-sum(masses .* v0(:,2))] ./ masses(1)
+sunspeed = [-sum(masses .* v0(1,:));-sum(masses .* v0(2,:))] ./ masses(1)
 sunspeed * masses(1)
-v0(1,:) = sunspeed;
-v0(2:5,:) += ones(4,1) * sunspeed;
+v0(:,1) = sunspeed;
+v0(:,2:5) += sunspeed * ones(1,4)
 
 %linear_momentum = (ones(1,2) * masses) .* v0
 %sum(linear_momentum)
@@ -37,14 +37,14 @@ tmax = 60*60*24*365.25 * 2;
 
 hold off;
 
-[px,py,vx,vy,t] = orbit_Nbody(G, masses', p0',v0', dt*20,tmax);
+[px,py,vx,vy,t] = orbit_Nbody(G, masses, p0,v0, dt*20,tmax);
 xs = px;
 ys = py;
 plot( xs,ys );
 legend('Sun','Mercury','Venus','Earth','Mars');
 print(gcf, '-dpng', 'uppg4_orbit_bad.png');
 
-[px,py,vx,vy,t] = orbit_Nbody(G, masses', p0',v0', dt,tmax);
+[px,py,vx,vy,t] = orbit_Nbody(G, masses, p0,v0, dt,tmax);
 %size(p)
 xs = rotdim(p(:,1,:));
 ys = rotdim(p(:,2,:));
@@ -53,7 +53,7 @@ legend('Sun','Mercury','Venus','Earth','Mars');
 print(gcf, '-dpng', 'uppg4_orbit.png');
 
 printf('Linear momentum\n')
-momentum = calculateLinearMomentum(masses', v);
+momentum = calculateLinearMomentum(masses, v);
 totalMomentum = (sum(momentum,1));
 %size(totalMomentum)
 xs = rotdim(totalMomentum(1,1,:));
