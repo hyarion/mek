@@ -24,10 +24,10 @@ v0 = [
 	0 2.4077E4
 ]';
 format long;
-sunspeed = [-sum(masses .* v0(1,:));-sum(masses .* v0(2,:))] ./ masses(1)
-sunspeed * masses(1)
+sunspeed = [-sum(masses .* v0(1,:));-sum(masses .* v0(2,:))] ./ masses(1);
+sunspeed * masses(1);
 v0(:,1) = sunspeed;
-v0(:,2:5) += sunspeed * ones(1,4)
+v0(:,2:5) += sunspeed * ones(1,4);
 
 %linear_momentum = (ones(1,2) * masses) .* v0
 %sum(linear_momentum)
@@ -37,13 +37,17 @@ tmax = 60*60*24*365.25 * 2;
 
 hold off;
 
-[px,py,vx,vy,t, Ek,Ep] = orbit_Nbody(G, masses, p0,v0, dt*20,tmax);
+
+%[px,py,vx,vy,t, Ek,Ep] = orbit_Nbody(G, masses, p0,v0, dt*20,tmax);
+%save('data.bin', 'px', 'py', 'vx', 'vy', 't', 'Ek', 'Ep')
+load('data.bin', 'px', 'py', 'vx', 'vy', 't', 'Ek', 'Ep')
 xs = px;
 ys = py;
 plot( xs,ys );
 legend('Sun','Mercury','Venus','Earth','Mars');
 print(gcf, '-dpng', 'uppg4_orbit_bad.png');
 
+epic_masses = ones(size(vx,1),1) * (masses);
 %[px,py,vx,vy,t] = orbit_Nbody(G, masses, p0,v0, dt,tmax);
 %%size(p)
 %xs = px;
@@ -51,6 +55,34 @@ print(gcf, '-dpng', 'uppg4_orbit_bad.png');
 %plot( xs,ys );
 %legend('Sun','Mercury','Venus','Earth','Mars');
 %print(gcf, '-dpng', 'uppg4_orbit.png');
+
+printf('Linear momentum\n')
+Px = epic_masses .* vx;
+Py = epic_masses .* vy;
+TotPx = sum(Px,2);
+TotPy = sum(Py,2);
+P = sqrt([TotPx Px].^2 + [TotPy Py].^2);
+plot(t,P)
+axis([0, 7e7, -2e28/2, 4e29])
+legend('Total', 'Sun','Mercury','Venus','Earth','Mars');
+print(gcf, '-dpng', 'uppg4_momentum.png');
+
+printf('Angular momentum\n')
+centre_mass_x = epic_masses .* px ./ sum(masses);
+centre_mass_y = epic_masses .* py ./ sum(masses);
+
+A = epic_masses .* ( (px - centre_mass_x) .* vy - (py - centre_mass_y) .* vx );
+plot(t,[sum(A,2) A])
+axis([0, 7e7, -1e40/2, 6e40])
+legend('Total', 'Sun','Mercury','Venus','Earth','Mars');
+print(gcf, '-dpng', 'uppg4_angular.png');
+
+printf('Kinetic energy\n')
+K = epic_masses .* (vx.^2 + vy.^2) ./ 2;
+plot(t,[sum(K,2) K])
+axis([0, 7e7, -1e33/2, 7e33])
+legend('Total','Sun','Mercury','Venus','Earth','Mars');
+print(gcf, '-dpng', 'uppg4_kinetic.png');
 
 %printf('Linear momentum\n')
 %momentum = calculateLinearMomentum(masses, v);
@@ -64,13 +96,12 @@ print(gcf, '-dpng', 'uppg4_orbit_bad.png');
 %print(gcf, '-dpng', 'uppg4_momentum.png');
 %clear momentum
 
-printf('Kinetic, Potential and Total energy\n')
 %kinetic = calculateKineticEnergy(masses', v);
 %totalKinetic = sum(kinetic,1);
-plot(t,Ek,Ep,Ek+Ep)
+size(Ek)
+plot(t,[Ek,Ep,Ek+Ep])
 ylabel('Energy (J)')
 xlabel('Time (s)')
-%legend('Sun','Mercury','Venus','Earth','Mars','Total');
 legend('Kinetic','Potential','Total');
 print(gcf, '-dpng', 'uppg4_energy.png');
 
