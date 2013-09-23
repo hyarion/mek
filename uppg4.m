@@ -38,24 +38,29 @@ tmax = 60*60*24*365.25 * 2;
 hold off;
 
 
-%[px,py,vx,vy,t, Ek,Ep] = orbit_Nbody(G, masses, p0,v0, dt*20,tmax);
-%save('data.bin', 'px', 'py', 'vx', 'vy', 't', 'Ek', 'Ep')
-load('data.bin', 'px', 'py', 'vx', 'vy', 't', 'Ek', 'Ep')
+printf('Bad orbit\n')
+[px,py,vx,vy,t, Ek,Ep] = orbit_Nbody(G, masses, p0,v0, dt*5E2,tmax);
+save('-binary','-zip', 'data_bad.bin', 'px', 'py', 'vx', 'vy', 't', 'Ek', 'Ep')
+%load('-binary','-zip', 'data_bad.bin', 'px', 'py', 'vx', 'vy', 't', 'Ek', 'Ep')
 xs = px;
 ys = py;
 plot( xs,ys );
 legend('Sun','Mercury','Venus','Earth','Mars');
 print(gcf, '-dpng', 'uppg4_orbit_bad.png');
+exit
+
+printf('Good orbit\n')
+% [px,py,vx,vy,t, Ek,Ep] = orbit_Nbody(G, masses, p0,v0, dt,tmax);
+% save('-binary','-zip', 'data.bin', 'px', 'py', 'vx', 'vy', 't', 'Ek', 'Ep')
+load('-binary','-zip', 'data.bin', 'px', 'py', 'vx', 'vy', 't', 'Ek', 'Ep')
+%%size(p)
+xs = px;
+ys = py;
+plot( xs,ys );
+legend('Sun','Mercury','Venus','Earth','Mars');
+print(gcf, '-dpng', 'uppg4_orbit.png');
 
 epic_masses = ones(size(vx,1),1) * (masses);
-%[px,py,vx,vy,t] = orbit_Nbody(G, masses, p0,v0, dt,tmax);
-%%size(p)
-%xs = px;
-%ys = py;
-%plot( xs,ys );
-%legend('Sun','Mercury','Venus','Earth','Mars');
-%print(gcf, '-dpng', 'uppg4_orbit.png');
-
 printf('Linear momentum\n')
 Px = epic_masses .* vx;
 Py = epic_masses .* vy;
