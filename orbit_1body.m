@@ -1,4 +1,4 @@
-function [position,velocity,t]=orbit_1body(G,M,m,p0,v0,dt,tmax)
+function [position,velocity,t, kinetic, potential, angular]=orbit_1body(G,M,m,p0,v0,dt,tmax)
 	masses = [M m];
 	gravitationalConstant = G;
 
@@ -6,37 +6,47 @@ function [position,velocity,t]=orbit_1body(G,M,m,p0,v0,dt,tmax)
 
 	numberOfSteps = floor(tmax/dt) + 1;
 	t         = zeros(numberOfSteps,1);
-	position  = zeros(numberOfSteps,2);
-	velocity  = zeros(numberOfSteps,2);
-	acceleration = zeros(numberOfSteps,2);
+	positionX = zeros(numberOfSteps,1);
+	positionY = zeros(numberOfSteps,1);
+	velocityX = zeros(numberOfSteps,1);
+	velocityY = zeros(numberOfSteps,1);
 
-	% Debug
-	%global kineticEnergyVector = zeros(numberOfSteps,1);
+	% momentumX = zeros(numberOfSteps,1);
+	% momentumY = zeros(numberOfSteps,1);
+	kinetic   = zeros(numberOfSteps,1);
+	potential = zeros(numberOfSteps,1);
 
-	position(1,:) = p0;
-	velocity(1,:) = v0;
+	angular   = zeros(numberOfSteps,1);
 
-	positions = [0 0 ; p0];
-	tmp = calculateAccelerations(positions, masses, gravitationalConstant);
-	acceleration(1,:) = tmp(2,:);
+	positionX(1) = p0(1);
+	positionY(1) = p0(2);
 
-	%global potentialEnergy;
-	%global potentialEnergyVector;
-	%potentialEnergyVector = zeros(numberOfSteps,1);
-	% size(potentialEnergyVector)
+	velocityX(1) = v0(1);
+	velocityY(1) = v0(2);
+
+	kinetic(1) = m * sum(v0.^2);
+
+	ax = @(x, y) -G * M * x / sqrt(x^2 + y^2)^3;
+	ay = @(x, y) -G * M * y / sqrt(x^2 + y^2)^3;
 
 	for s = 1:numberOfSteps-1
+		x = positionX(s);
+		y = positionY(s);
 		t(s+1) = t(s) + dt;
-		position(s+1,:) = position(s,:) + velocity(s,:)*dt + 0.5 * acceleration(s,:) * (dt^2);
 
-		tmpPositions = [0 0 ; position(s+1,:)];
-		tmpAccelerations = calculateAccelerations(tmpPositions, masses, gravitationalConstant);
+		positionX(s+1) = x1 = positionX(s) + velocityX(s)*dt + 0.5 * ax(x,y) * (dt^2);
+		positionY(s+1) = y1 = positionY(s) + velocityY(s)*dt + 0.5 * ay(x,y) * (dt^2);
 
-		acceleration(s+1,:) = tmpAccelerations(2,:);
-		velocity(s+1,:) = velocity(s,:) + 0.5 * (acceleration(s+1,:) + acceleration(s,:)) * dt;
-
-		%potentialEnergyVector(s+1) = potentialEnergy(1);
+		velocityX(s+1) = velocityX(s) + 0.5 * (ax(x,y) + ax(x1,y1)) * dt;
+		velocityY(s+1) = velocityY(s) + 0.5 * (ay(x,y) + ay(x1,y1)) * dt;
 	end
 	
-	%kineticEnergyVector = sum(velocity.^2, 2) .* (m/2);
-	% size(kineticEnergyVector)
+
+	kinetic = m .* (velocityX.^2 + velocityY.^2) ./ 2;
+	potential = -G .* m .* M ./ sqrt( positionX.^2 + positionY.^2);
+
+
+	angular = m .* (positionX .* velocityY - positionY .* velocityX);
+
+	position = [positionX positionY];
+	velocity = [velocityX velocityY];

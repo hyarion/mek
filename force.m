@@ -1,6 +1,4 @@
-function forces=force(G,masses,positions)
-	[numberOfBodies,numberOfDimensions] = size(positions);
+function forces=force(G,masses,x, y)
+	[numberOfBodies] = size(masses, 1);
 
-	forces = zeros(numberOfBodies,numberOfDimensions);
-
-	forces = calculateAccelerations(positions, masses, G) .* (masses' * ones(1,numberOfDimensions));
+	forces = calculateAccelerations(x, y, masses, G) .* masses;

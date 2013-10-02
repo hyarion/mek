@@ -22,7 +22,7 @@ for t = 1:numberOfTimesteps
 			end
 		end
 		%printf('\t\tmasses(r): %g\n',masses(r))
-		potential(r,t) *= (-masses(r)) * gravitationalConstant;
+		potential(r,t) *= (-masses(r)) * gravitationalConstant / 2.0;
 	end
 end
 
