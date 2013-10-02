@@ -13,6 +13,7 @@ Klassisk Mekanik\\
 Benjamin Nauck, c05ben@cs.umu.se\\
 Emil Eriksson, c07een@cs.umu.se\\
 ~\\
+Försök två...
 %\today{}
 }
 \clearpage
@@ -26,8 +27,11 @@ hjälp av Velocity-Verlet-simulering.
 \section{Simulering av satellit}
 Satellitens omloppsbana går att finna i Figur~\vref{fig:satellite}.
 För att satellitens omloppsbana ska bli stabil behöver $\Delta t$ vara kring
-$100$.
-%Se Figur~\vref{fig:satellite:findstableorbit}
+$0.01$.
+Detta värde togs fram genom att plotta satellitens bana med olika värden för $\Delta t$.
+När ett värde hittats som såg ut att ge stabila banor delades det sedan med 10
+för att ge en liten säkerhetsmarginal.
+
 \begin{figure}
 \begin{center}
 	\includegraphics[width=\textwidth]{../uppg1_orbit.png}
@@ -36,22 +40,16 @@ $100$.
 \label{fig:satellite}
 \end{figure}
 
-%\begin{figure}
-%\begin{center}
-%	\includegraphics[width=\textwidth]{}
-%\end{center}
-%\caption{Satellitens bana när $\Delta t$ förändras.}
-%\label{fig:satellite:findstableorbit}
-%\end{figure}
-
 I Figur~\vref{fig:satellite:energy} går det att se hur energin i systemet ändras
 över tiden.
 I Figur~\vref{fig:satellite:linearmomentum} går det att se hur rörelsemängden i
 systemet ändras över tiden.
+I Figur~\vref{fig:satellite:angularmomentum} går det att se hur
+rörelsemängdsmomentet i systemet ändras över tiden.
 
 \begin{figure}
 \begin{center}
-	\includegraphics[width=\textwidth]{../uppg1_energy.png}
+	\includegraphics[width=0.8\textwidth]{../uppg1_energy.png}
 \end{center}
 \caption{Energin för satelliten i omloppsbana.}
 \label{fig:satellite:energy}
@@ -59,28 +57,37 @@ systemet ändras över tiden.
 
 \begin{figure}
 \begin{center}
-	\includegraphics[width=\textwidth]{../uppg1_momentum.png}
+	\includegraphics[width=0.8\textwidth]{../uppg1_momentum_linear.png}
 \end{center}
 \caption{Rörelsemängden för satelliten.}
 \label{fig:satellite:linearmomentum}
 \end{figure}
 
+\begin{figure}
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{../uppg1_momentum_angular.png}
+\end{center}
+\caption{Rörelsemängdsmoment för satelliten.}
+\label{fig:satellite:angularmomentum}
+\end{figure}
+
 
 \section{Omloppstiden}
 	\subsection{Beräkning av omloppstid}
-För att beräkna omloppstiden itererar vi igenom positionerna och ser när
-positionen går in i första kvadranten.
+För att beräkna omloppstiden gör vi om positionen till vinkeln relativt x och
+y-axeln, sedan itererar vi igenom den resulterande vektorn och ser när vinkeln
+återkommer till samma värde.
 
-Omloppstiden för satelliten är beräknad till: $37$.
+Omloppstiden för satelliten är beräknad till: $37$ tidsenheter.
 
-Om initialhastigheten ökas till runt $1.4$ lämnar satelliten sin omloppsbana.
+Om initialhastigheten ökas till runt $1.4$ hastighetsenheter lämnar satelliten sin omloppsbana.
 Se Figur~\vref{fig:orbit:mutlipleorbits}.
 I Figur~\vref{fig:orbit:timeforvelocity} kan vi se att omloppstiden ökar exponensiellt
 med initialhastigheten.
 
 \begin{figure}
 \begin{center}
-	\includegraphics[width=\textwidth]{../uppg2_orbits.png}
+	\includegraphics[width=0.8\textwidth]{../uppg2_orbits.png}
 \end{center}
 \caption{
 Omloppsbanor då initialhastigheten förändras hos satelliten.
@@ -90,7 +97,7 @@ Omloppsbanor då initialhastigheten förändras hos satelliten.
 
 \begin{figure}
 \begin{center}
-	\includegraphics[width=\textwidth]{../uppg2_energy.png}
+	\includegraphics[width=0.8\textwidth]{../uppg2_energy.png}
 \end{center}
 \caption{
 Som vi kan se så ökar omloppstiden exponensiellt med initialhastigheten.
@@ -100,7 +107,7 @@ Som förväntat ökar energin kvadratiskt.
 \end{figure}
 
 	\subsection{ISS}
-För att undersöka om våran simuleringsmodell fungerar testar vi att simulera
+För att undersöka om vår simuleringsmodell fungerar testar vi att simulera
 rymdstationen ISS omloppsbana kring jorden med verklig data.
 
 Den data vi fört in i system återfinns i Tabell~\vref{iss:data}.
@@ -123,16 +130,36 @@ kringjorden.[wikipedia]}
 \end{center}
 \end{table}
 
-Den simulerade omloppstiden för ISS är beräknad till $5651s$ vilket tycks
-stämma ganska bra med det riktiga värdet som ligger på $5570s$ [wikipedia].
+Den simulerade omloppstiden för ISS är beräknad till ungefär $5650s$ vilket
+tycks stämma ganska bra med det riktiga värdet som ligger på $5570s$
+[wikipedia].
 
+Med minskande värde på $\Delta t$ närmar sig den simulerade tiden ett stabilt
+värde vilket kan ses i Figur~\vref{iss:tider}.
+Omloppsbanorna för simuleringarna återfinns i Figur~\vref{iss:banor}.
+Banorna ser stabila ut vid $\Delta t = 100s$ men omloppstiden ovan är beräknad
+med $\Delta t = 1.5s$.
+
+% TODO: Gör om plotten med olika färger för olika värden på dt
+% TODO: Rita jorden i korrekt storlek eller lägg in en korrekt bild av jorden
 \begin{figure}
 \begin{center}
-	\includegraphics[width=\textwidth]{../uppg2_iss.png}
+	\includegraphics[width=0.8\textwidth]{../uppg2_iss.png}
 \end{center}
 \caption{
 	ISS simulerade omloppsbana kring jorden för ett antal värden på $\Delta t$
 }
+\label{iss:banor}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{../uppg2_iss_time.png}
+\end{center}
+\caption{
+	Beräknad omloppstid för ISS med minskande värde på $\Delta t$
+}
+\label{iss:tider}
 \end{figure}
 
 \section{Tvåkroppsproblemet}
@@ -146,12 +173,13 @@ Data för dessa kroppar återfinns i Tabell~\vref{solarsystem:data}.
 \begin{table}
 \begin{center}
 \begin{tabular}{c|c|c|c}
-	Planet    & Massa (relativt jordens) & Avstånd till Solen (mätt i $AU$) & hastighet\\
+	Planet    & Massa ($kg$) & Avstånd till Solen (mätt i $m$) & hastighet ($m/s$)\\
 	\hline
-	Merkurius & $5.5 \cdot 10^{-2}$  & $4 \cdot 10^{-1}$  &  $4.787 \cdot 10^4$ \\
-	Venus     & $8.15 \cdot 10^{-1}$ & $7 \cdot 10^{-1}$  &  $3.502 \cdot 10^4$ \\ 
-	Jorden    & $1$                  & $1$                &  $2.978 \cdot 10^4$ \\
-	Mars      & $1.07 \cdot 10^{-1}$ & $1.5$              &  $2.4077 \cdot 10^4$
+	Solen     & $1.988435 \cdot 10^{30}$  & $0.0$                      & $0.0$ \\
+	Merkurius & $3.3022 \cdot 10^{23}$    & $5.79091 \cdot 10^{10}$    &  $4.787 \cdot 10^4$ \\
+	Venus     & $4.869 \cdot 10^{24}$     & $1.08208 \cdot 10^{11}$    &  $3.502 \cdot 10^4$ \\ 
+	Jorden    & $5.9721986 \cdot 10^{24}$ & $1.49598261 \cdot 10^{11}$ &  $2.978 \cdot 10^4$ \\
+	Mars      & $6.4191 \cdot 10^{23}$    & $2.279391 \cdot 10^{11}$   &  $2.4077 \cdot 10^4$
 \end{tabular}
 \caption{
 	Tabell över de inre planeternas och solens massor, planeternas avstånd till
@@ -172,6 +200,11 @@ resultat detta värde väljs för högt, men om man istället väljer ett
 tillräckligt lågt tal så stabiliseras omloppsbanorna, se
 Figur~\vref{fig:solarsystem:small:enough:dt}.
 
+Värdet som användes i simuleringarna togs fram genom att ett antal simuleringar
+med minskande värden på $\Delta t$ gjordes. 
+När planeternas banor såg jämna ut delades värdet på $\Delta t$ med 10 och
+detta värde användes sedan i efterföljande simuleringar.
+
 %		\subsection{Planetära omloppsbanor} % svarat på ovan
 
 		\subsection{Validering av simulering}
@@ -180,62 +213,65 @@ Vidare går det att undersöka om energin och rörelsemängden
 bevaras genom simuleringen för att validera
 simuleringsmodellen.
 
-I Figur~\vref{fig:solarsystem:kinetic} kan vi se den kinetiska energin för de olika kropparna i solsystemet.
-Tillsammans med Figur~\vref{fig:solarsystem:potential} som visar den potentiella energin får man 
-Figur~\vref{fig:solarsystem:energy}.
-Den totala energin domineras totalt av den potentiella energin och den potentiella energin domineras av bidraget från Solen.
+I Figur~\vref{fig:solarsystem:energy} kan vi se den kinetiska energin för de olika kropparna i solsystemet
+tillsammans med den potentiella energin samt den totala energin.
+Den totala energin domineras totalt av den potentiella energin.
+
 \begin{figure}
 \begin{center}
-	\includegraphics[width=\textwidth]{../uppg4_orbit_bad}
+	\includegraphics[width=0.8\textwidth]{../uppg4_orbit_bad}
 \end{center}
-\caption{Simulerade omloppsbanor med ett för stort värde på $\Delta t$}
+\caption{Simulerade omloppsbanor med ett för stort värde på $\Delta t$ ($5\cdot 10^5 s$)}
 \label{fig:solarsystem:large:dt}
 \end{figure}
 
 \begin{figure}
 \begin{center}
-	\includegraphics[width=\textwidth]{../uppg4_orbit}
+	\includegraphics[width=0.8\textwidth]{../uppg4_orbit}
 \end{center}
-\caption{Simulering av omloppsbanor i solsystemet}
+\caption{Simulering av omloppsbanor i solsystemet ($\Delta t = 10^3 s$)}
 \label{fig:solarsystem:small:enough:dt}
 \end{figure}
 
 \begin{figure}
 \begin{center}
-	\includegraphics[width=\textwidth]{../uppg4_potential}
+	\includegraphics[width=0.8\textwidth]{../uppg4_energy}
 \end{center}
-\caption{Potentiella energin under simuleringen i Figur~\vref{fig:solarsystem:small:enough:dt}.}
-\label{fig:solarsystem:potential}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-	\includegraphics[width=\textwidth]{../uppg4_kinetic}
-\end{center}
-\caption{Rörelseenergin under simuleringen i Figur~\vref{fig:solarsystem:small:enough:dt}.}
-\label{fig:solarsystem:kinetic}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-	\includegraphics[width=\textwidth]{../uppg4_total_energy}
-\end{center}
-\caption{Totala energin under simuleringen i Figur~\vref{fig:solarsystem:small:enough:dt}.}
+\caption{Energin under simuleringen i Figur~\vref{fig:solarsystem:small:enough:dt}.}
 \label{fig:solarsystem:energy}
 \end{figure}
 
 I Figur~\vref{fig:solarsystem:linearmomentum} kan vi se rörelsemängden i systemet.
-Diagrammet visar absolutbeloppet av det totala rörelsemomentet.
+Diagrammet visar absolutbeloppet av den totala rörelsemängden.
+I Figur~\vref{fig:solarsystem:angularmomentum} visas rörelsemängdsmomentet i systemet.
+I Figur~\vref{fig:solarsystem:kineticenergy} visas rörelseenergin i systemet.
+Eftersom den totala massan totalt domineras av solens massa så är systemets
+masscentrum väldigt nära solens masscentrum vilket gör att bidraget till
+rörelsemängdsmomentet från solen praktiskt taget är noll.
 %Anledningen till att det har ett så ``stort'' värde trots att det borde vara 0 kan vara att det är ett avrundningsfel.
 \begin{figure}
 \begin{center}
-	\includegraphics[width=\textwidth]{../uppg4_momentum}
+	\includegraphics[width=0.8\textwidth]{../uppg4_momentum}
 \end{center}
 \caption{Rörelsemängden under simuleringen i Figur~\vref{fig:solarsystem:small:enough:dt}.}
 \label{fig:solarsystem:linearmomentum}
 \end{figure}
 
-%Och slutligen i Figur~\vref{fig:solarsystem:energy} kan vi se TODO: add what we can read.
+\begin{figure}
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{../uppg4_angular}
+\end{center}
+\caption{Rörelsemängdsmomentet under simuleringen i Figur~\vref{fig:solarsystem:small:enough:dt}.}
+\label{fig:solarsystem:angularmomentum}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{../uppg4_kinetic}
+\end{center}
+\caption{Rörelseenergi under simuleringen i Figur~\vref{fig:solarsystem:small:enough:dt}.}
+\label{fig:solarsystem:kineticenergy}
+\end{figure}
 
 		\subsection{Omloppstider}
 Mycket går att analysera genom att undersöka energibevarande och så vidare, men
@@ -243,22 +279,25 @@ simulerar man verkligheten bör man även undersöka så att simuleringen verkli
 ter sig som verkligheten.
 Av denna anledning har vi undersökt tiden för planeternas omloppsbanor i
 Tabell~\vref{table:solarsystem:orbit:reality:check}.
-Som vi kan se så stämmer inte våra simulerade tider speciellt bra med
+Som vi kan se så stämmer våra simulerade tider speciellt bra med
 verkligheten.
-Den som kan hitta anledningen blir belönad med bulle och tillhörande kaffe.
+De avvikelser som förekommer kan förklaras med bland annat den förenklade modell som har använts.
+Alla planeterna har startat på en gemensam linje på sitt medelavstånd från solen och med sin medelhastighet.
+Som nämns i labbspecen så ger detta cirkelrunda banor istället för de verkliga, elliptiska.
+
 
 \begin{table}
 \begin{center}
 \begin{tabular}{c|c|c}
 	Planet    & Simulerad omloppstid & Reell omloppstid \\
 	\hline
-	Merkurius & $6.046 \cdot 10^6$ &  $7.60053 \cdot 10^7$ \\
-	Venus     & $7.470 \cdot 10^5$ &  $1.94139 \cdot 10^7$ \\ 
-	Jorden    & $1.570 \cdot 10^7$ &  $3.15581 \cdot 10^7$ \\
-	Mars      & $3.498 \cdot 10^7$ &  $5.93542 \cdot 10^7$
+	Merkurius & $87.9745$ &  $87.9691$ \\
+	Venus     & $224.699$ &  $224.698$ \\ 
+	Jorden    & $365.127$ &  $365.256$ \\
+	Mars      & $682.581$ &  $686.970$
 \end{tabular}
 \caption{
-	Tabell över de inre planeternas omloppstider.[wikipedia]
+	Tabell över de inre planeternas omloppstider i jorddygn.[wikipedia]
 }
 \label{table:solarsystem:orbit:reality:check}
 \end{center}

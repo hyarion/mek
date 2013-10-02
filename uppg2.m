@@ -28,7 +28,7 @@ for n=1:iterations+1
 	plot(p(:,1), p(:,2));
 	drawnow();
 
-	addedVelocity(2)
+	addedVelocity(2) + v0(2)
 	T = orbit_time(p(:,1),p(:,2),t)
 	orbitTimes(n) = T;
 

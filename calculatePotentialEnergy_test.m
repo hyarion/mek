@@ -6,9 +6,7 @@ positions = [
 	0 0
 	1 0
 ];
-expected = [
-	-1
-];
+expected = [ -1 -1 ]';
 potential = calculatePotentialEnergy(masses, positions, gravitationalConstant);
 assert(potential,expected)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -18,9 +16,7 @@ positions = [
 	0 0
 	1 0
 ];
-expected = [
-	-6
-];
+expected = [ -6 -6 ]';
 potential = calculatePotentialEnergy(masses, positions, gravitationalConstant);
 assert(potential,expected)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

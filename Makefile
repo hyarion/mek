@@ -19,3 +19,7 @@ tests: $(TESTS) $(TESTED_FILES)
 .uppg%: uppg%.m
 	$(OCTAVE) -f $<
 	touch $@
+
+report: .uppg1 .uppg2 .uppg2_iss .uppg4
+	cd "$(@)"; make
+.PHONY: report
