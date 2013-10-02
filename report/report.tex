@@ -13,6 +13,7 @@ Klassisk Mekanik\\
 Benjamin Nauck, c05ben@cs.umu.se\\
 Emil Eriksson, c07een@cs.umu.se\\
 ~\\
+Försök två...
 %\today{}
 }
 \clearpage
@@ -26,8 +27,11 @@ hjälp av Velocity-Verlet-simulering.
 \section{Simulering av satellit}
 Satellitens omloppsbana går att finna i Figur~\vref{fig:satellite}.
 För att satellitens omloppsbana ska bli stabil behöver $\Delta t$ vara kring
-$100$.
-%Se Figur~\vref{fig:satellite:findstableorbit}
+$0.01$.
+Detta värde togs fram genom att plotta satellitens bana med olika värden för $\Delta t$.
+När ett värde hittats som såg ut att ge stabila banor delades det sedan med 10
+för att ge en liten säkerhetsmarginal.
+
 \begin{figure}
 \begin{center}
 	\includegraphics[width=\textwidth]{../uppg1_orbit.png}
@@ -35,14 +39,6 @@ $100$.
 \caption{Satellitens omloppsbana.}
 \label{fig:satellite}
 \end{figure}
-
-%\begin{figure}
-%\begin{center}
-%	\includegraphics[width=\textwidth]{}
-%\end{center}
-%\caption{Satellitens bana när $\Delta t$ förändras.}
-%\label{fig:satellite:findstableorbit}
-%\end{figure}
 
 I Figur~\vref{fig:satellite:energy} går det att se hur energin i systemet ändras
 över tiden.
@@ -144,6 +140,8 @@ Omloppsbanorna för simuleringarna återfinns i Figur~\vref{iss:banor}.
 Banorna ser stabila ut vid $\Delta t = 100s$ men omloppstiden ovan är beräknad
 med $\Delta t = 1.5s$.
 
+% TODO: Gör om plotten med olika färger för olika värden på dt
+% TODO: Rita jorden i korrekt storlek eller lägg in en korrekt bild av jorden
 \begin{figure}
 \begin{center}
 	\includegraphics[width=0.8\textwidth]{../uppg2_iss.png}
@@ -175,12 +173,13 @@ Data för dessa kroppar återfinns i Tabell~\vref{solarsystem:data}.
 \begin{table}
 \begin{center}
 \begin{tabular}{c|c|c|c}
-	Planet    & Massa (relativt jordens) & Avstånd till Solen (mätt i $AU$) & hastighet\\
+	Planet    & Massa ($kg$) & Avstånd till Solen (mätt i $m$) & hastighet ($m/s$)\\
 	\hline
-	Merkurius & $5.5 \cdot 10^{-2}$  & $4 \cdot 10^{-1}$  &  $4.787 \cdot 10^4$ \\
-	Venus     & $8.15 \cdot 10^{-1}$ & $7 \cdot 10^{-1}$  &  $3.502 \cdot 10^4$ \\ 
-	Jorden    & $1$                  & $1$                &  $2.978 \cdot 10^4$ \\
-	Mars      & $1.07 \cdot 10^{-1}$ & $1.5$              &  $2.4077 \cdot 10^4$
+	Solen     & $1.988435 \cdot 10^{30}$  & $0.0$                      & $0.0$ \\
+	Merkurius & $3.3022 \cdot 10^{23}$    & $5.79091 \cdot 10^{10}$    &  $4.787 \cdot 10^4$ \\
+	Venus     & $4.869 \cdot 10^{24}$     & $1.08208 \cdot 10^{11}$    &  $3.502 \cdot 10^4$ \\ 
+	Jorden    & $5.9721986 \cdot 10^{24}$ & $1.49598261 \cdot 10^{11}$ &  $2.978 \cdot 10^4$ \\
+	Mars      & $6.4191 \cdot 10^{23}$    & $2.279391 \cdot 10^{11}$   &  $2.4077 \cdot 10^4$
 \end{tabular}
 \caption{
 	Tabell över de inre planeternas och solens massor, planeternas avstånd till
@@ -244,7 +243,8 @@ Den totala energin domineras totalt av den potentiella energin.
 
 I Figur~\vref{fig:solarsystem:linearmomentum} kan vi se rörelsemängden i systemet.
 Diagrammet visar absolutbeloppet av den totala rörelsemängden.
-I Figur~\vref{fig:solarsystem:angularmomentum} visas rärelsemängdsmomentet i systemet.
+I Figur~\vref{fig:solarsystem:angularmomentum} visas rörelsemängdsmomentet i systemet.
+I Figur~\vref{fig:solarsystem:kineticenergy} visas rörelseenergin i systemet.
 Eftersom den totala massan totalt domineras av solens massa så är systemets
 masscentrum väldigt nära solens masscentrum vilket gör att bidraget till
 rörelsemängdsmomentet från solen praktiskt taget är noll.
@@ -265,7 +265,13 @@ rörelsemängdsmomentet från solen praktiskt taget är noll.
 \label{fig:solarsystem:angularmomentum}
 \end{figure}
 
-%Och slutligen i Figur~\vref{fig:solarsystem:energy} kan vi se TODO: add what we can read.
+\begin{figure}
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{../uppg4_kinetic}
+\end{center}
+\caption{Rörelseenergi under simuleringen i Figur~\vref{fig:solarsystem:small:enough:dt}.}
+\label{fig:solarsystem:kineticenergy}
+\end{figure}
 
 		\subsection{Omloppstider}
 Mycket går att analysera genom att undersöka energibevarande och så vidare, men
@@ -273,9 +279,12 @@ simulerar man verkligheten bör man även undersöka så att simuleringen verkli
 ter sig som verkligheten.
 Av denna anledning har vi undersökt tiden för planeternas omloppsbanor i
 Tabell~\vref{table:solarsystem:orbit:reality:check}.
-Som vi kan se så stämmer inte våra simulerade tider speciellt bra med
+Som vi kan se så stämmer våra simulerade tider speciellt bra med
 verkligheten.
-Den som kan hitta anledningen blir belönad med bulle och tillhörande kaffe.
+De avvikelser som förekommer kan förklaras med bland annat den förenklade modell som har använts.
+Alla planeterna har startat på en gemensam linje på sitt medelavstånd från solen och med sin medelhastighet.
+Som nämns i labbspecen så ger detta cirkelrunda banor istället för de verkliga, elliptiska.
+
 
 \begin{table}
 \begin{center}

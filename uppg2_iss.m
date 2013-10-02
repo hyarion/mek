@@ -28,4 +28,5 @@ print(gcf, '-dpng', 'uppg2_iss.png')
 
 hold off;
 plot(previousTs);
+ylabel('Time (s)')
 print(gcf, '-dpng', 'uppg2_iss_time.png')

@@ -39,20 +39,25 @@ hold off;
 
 
 printf('Bad orbit\n')
-[px,py,vx,vy,t, Ek,Ep] = orbit_Nbody(G, masses, p0,v0, dt*5E2,tmax);
-save('-binary','-zip', 'data_bad.bin', 'px', 'py', 'vx', 'vy', 't', 'Ek', 'Ep')
-%load('-binary','-zip', 'data_bad.bin', 'px', 'py', 'vx', 'vy', 't', 'Ek', 'Ep')
+if 2 == exist('data_bad.bin')
+	load('-binary', 'data_bad.bin', 'px', 'py', 'vx', 'vy', 't', 'Ek', 'Ep')
+else
+	[px,py,vx,vy,t, Ek,Ep] = orbit_Nbody(G, masses, p0,v0, dt*5E2,tmax);
+	save('-binary', 'data_bad.bin', 'px', 'py', 'vx', 'vy', 't', 'Ek', 'Ep')
+end
 xs = px;
 ys = py;
 plot( xs,ys );
 legend('Sun','Mercury','Venus','Earth','Mars');
 print(gcf, '-dpng', 'uppg4_orbit_bad.png');
-exit
 
 printf('Good orbit\n')
-% [px,py,vx,vy,t, Ek,Ep] = orbit_Nbody(G, masses, p0,v0, dt,tmax);
-% save('-binary','-zip', 'data.bin', 'px', 'py', 'vx', 'vy', 't', 'Ek', 'Ep')
-load('-binary','-zip', 'data.bin', 'px', 'py', 'vx', 'vy', 't', 'Ek', 'Ep')
+if 2 == exist('data.bin')
+	load('-binary', 'data.bin', 'px', 'py', 'vx', 'vy', 't', 'Ek', 'Ep')
+else
+	[px,py,vx,vy,t, Ek,Ep] = orbit_Nbody(G, masses, p0,v0, dt,tmax);
+	save('-binary', 'data.bin', 'px', 'py', 'vx', 'vy', 't', 'Ek', 'Ep')
+end
 %%size(p)
 xs = px;
 ys = py;
